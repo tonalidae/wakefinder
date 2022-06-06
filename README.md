@@ -1,2 +1,2 @@
 # reca
-Proyecto RECA
+Repositorio del Proyecto RECA
