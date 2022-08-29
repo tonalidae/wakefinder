@@ -134,3 +134,8 @@ data/
 #editor settings
 .editorconfig
 .vscode/
+
+#video files
+*.mp4
+*.mov
+media/videos/
