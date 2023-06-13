@@ -2,6 +2,7 @@ import numpy as np
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import plotly.figure_factory as ff
+import scipy.stats as st
 def hist_r_l(halo):
     """ Plot the histogram of the position of the LMC around the MW.
 
@@ -105,7 +106,7 @@ def surface_plot(orb_pos, n_vector):
     y = np.linspace(np.min(X[:, 1]), np.max(X[:, 1]), 10)
     X_mesh, Y_mesh = np.meshgrid(x, y)
     Z_mesh = (-a * X_mesh - b * Y_mesh) / c
-    fig = go.Figure(data=[go.Surface(z=Z_mesh, x=X_mesh, y=Y_mesh, colorscale='Viridis', opacity=0.5)])
+    fig = go.Figure(data=[go.Surface(z=Z_mesh, x=X_mesh, y=Y_mesh, colorscale='Viridis', opacity=0.7)])
     fig.add_trace(
         go.Scatter3d(x=orb_pos[:, 0], y=orb_pos[:, 1], z=orb_pos[:, 2],
                      mode='markers', marker=dict(size=1, color='#ccc')))
@@ -224,6 +225,294 @@ def LMC_plot(orb_pos, proj):
         LMC_yz.update_xaxes(title_text="Y [kpc]", title_font_size=15)
         LMC_yz.update_yaxes(title_text="Z [kpc]", title_font_size=15)
         LMC_yz.show()
+
+#Function to compute and plot density countours
+def density_contour_plt(halo, lmc,proj):
+    if proj == 'yz':
+        title = 'MW LMC perturbed halo YZ'
+        figname = 'density_contour_yz'
+        x_label = 'y [kpc]'
+        y_label = 'z [kpc]'
+        x_data = 1
+        y_data = 2
+    elif proj == 'xz':
+        title = 'MW LMC perturbed halo XZ'
+        figname = 'density_contour_xz'
+        x_label = 'x [kpc]'
+        y_label = 'z [kpc]'
+        x_data = 0
+        y_data = 2
+    elif proj == 'xy':
+        title = 'MW LMC perturbed halo XY'
+        figname = 'density_contour_xy'
+        x_label = 'x [kpc]'
+        y_label = 'y [kpc]'
+        x_data = 0
+        y_data = 1
+    #Calculate min and max
+    xmin, xmax = halo[:,x_data].min(), halo[:,x_data].max()
+    ymin, ymax = halo[:,y_data].min(), halo[:,y_data].max()
+
+    # Create a meshgrid for the contour plot
+    xx, yy = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
+
+    # Estimate the PDF using Gaussian kernel density estimation
+    positions = np.vstack([xx.ravel(), yy.ravel()])
+    values = np.vstack([halo[:, x_data], halo[:, y_data]])
+    kernel = st.gaussian_kde(values)
+    pdf = np.reshape(kernel(positions).T, xx.shape)
+
+    # Set the figure size
+    fig, ax = plt.subplots(figsize=(8, 8))
+
+    # LMC orbit plot in the projection
+    ax.plot(lmc[:, x_data], lmc[:, y_data], linestyle='-', color='cyan', alpha=0.8, label='lmc')
+    # Set the aspect ratio to 'equal'
+    ax.set_aspect('equal')
+    # Contour plot
+    #Contour filled
+    ax.contourf(xx, yy, pdf, cmap='viridis')
+    #Contour lines
+    ax.contour(xx, yy, pdf, colors='black', alpha=0.8, linewidths=0.5)
+
+
+    # # Scatter plot
+    # ax.scatter(halo[:, x_data], halo[:, y_data], s=5, c='white', alpha=0.5)
+
+    # Set labels and title
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_title('Particle Density Contour Plot (x-y projection)')
+
+    # Display the plot
+    plt.show()
+#Function to plot histogram of sel2 particles plus LMC orbit
+def hist_orbit_plt(halo, lmc, proj, coarse_step, arrow_scale, arrow_width, ispert):
+    if ispert == True:
+        label = 'pert'
+        if proj == 'yz':
+            title = 'MW LMC perturbed halo YZ'
+            figname = 'hist_orb_pert_yz'
+            x_label = 'y [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 1
+            y_data = 2
+            vx_data = 4
+            vy_data = 5
+        elif proj == 'xz':
+            title = 'MW LMC perturbed halo XZ'
+            figname = 'hist_orb_pert_xz'
+            x_label = 'x [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 0
+            y_data = 2
+            vx_data = 3
+            vy_data = 5
+        elif proj == 'xy':
+            title = 'MW LMC perturbed halo XY'
+            figname = 'hist_orb_pert_xy'
+            x_label = 'x [kpc]'
+            y_label = 'y [kpc]'
+            x_data = 0
+            y_data = 1
+            vx_data = 3
+            vy_data = 4
+        else:
+            raise ValueError("Invalid projection")
+    elif ispert == False:
+        label = 'unpert'
+        if proj == 'yz':
+            title = 'MW LMC unperturbed halo YZ'
+            figname = 'hist_orb_unpert_yz'
+            x_label = 'y [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 1
+            y_data = 2
+            vx_data = 4
+            vy_data = 5
+        elif proj == 'xz':
+            title = 'MW LMC unperturbed halo XZ'
+            figname = 'hist_orb_unpert_xz'
+            x_label = 'x [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 0
+            y_data = 2
+            vx_data = 3
+            vy_data = 5
+        elif proj == 'xy':
+            title = 'MW LMC unperturbed halo XY'
+            figname = 'hist_orb_unpert_xy'
+            x_label = 'x [kpc]'
+            y_label = 'y [kpc]'
+            x_data = 0
+            y_data = 1
+            vx_data = 3
+            vy_data = 4
+        else:
+            raise ValueError("Invalid projection")
+    # Create a coarser grid for the starting positions
+      # Adjust this value to control the density of arrows
+    x_positions = halo[::coarse_step, x_data]
+    y_positions = halo[::coarse_step, y_data]
+    x_directions = halo[::coarse_step, vx_data]
+    y_directions = halo[::coarse_step, vy_data]
+
+    fig, ax = plt.subplots()
+    ax.quiver(x_positions, y_positions, x_directions, y_directions,
+              scale=arrow_scale, width=arrow_width, color='white', alpha=0.5, label=label,
+              edgecolors='black', linewidths=0.5)
+
+    # ax.scatter(pert[:, x_data], pert[:, y_data], s=1, color='red', alpha=0.8, label='pert')
+
+    # Create a 2D histogram
+    hist, xedges, yedges = np.histogram2d(halo[:, x_data], halo[:, y_data], bins=30)
+
+    # Normalize the histogram
+    hist = hist / np.max(hist)
+
+    # Create a colormap
+    cmap = plt.get_cmap("viridis")
+
+    # Plot the histogram using imshow
+    im = ax.imshow(hist.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto")
+
+    # Add a colorbar
+    cbar = fig.colorbar(im, ax=ax, label="Particle density", shrink=0.5)
+
+    # Set axis labels
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    # Get the x-axis and y-axis limits from the histogram plot
+    x_min, x_max = ax.get_xlim()
+    y_min, y_max = ax.get_ylim()
+
+    # LMC orbit plot in the projection
+    ax.plot(lmc[:, x_data], lmc[:, y_data], linestyle='-', color='cyan', alpha=0.8, label='lmc')
+    # ax.scatter(pert[:, x_data], pert[:, y_data], s=2, color='violet', alpha=0.8, label='pert pos')
+    # Get the x-axis and y-axis limits from the line plot
+
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(y_min, y_max)
+    arrow_start = (lmc[:, x_data][-1], lmc[:, y_data][-1])
+    arrow_end = (lmc[:, x_data][-1] + 0.5, lmc[:, y_data][-1])
+    ax.annotate("", xy=arrow_end, xytext=arrow_start, arrowprops=dict(arrowstyle="->", lw=3, color = 'cyan', alpha=0.8))
+
+    ax.set_title(title)
+
+    ax.legend()
+    ax.set_aspect('equal')
+
+    #save the plot to a high resolution image
+    plt.savefig('../../media/imgs/sel2/'+figname+'.png', dpi=300)
+
+    # Show the plot
+    plt.show()
+
+
+#Function to plot vector field of sel2 pos particles
+def vector_field_plt(halo, lmc, proj, coarse_step, arrow_scale, arrow_width, ispert):
+    if ispert == True:
+        label = 'pert'
+        if proj == 'yz':
+            title = 'velocity field perturbed halo sel 2 YZ'
+            x_label = 'y [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 1
+            y_data = 2
+            vx_data = 4
+            vy_data = 5
+            fig_name = 'vel_pert_sel2_yz'
+        elif proj == 'xz':
+            title = 'velocity field perturbed halo sel 2 XZ'
+            x_label = 'x [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 0
+            y_data = 2
+            vx_data = 3
+            vy_data = 5
+            fig_name = 'vel_pert_sel2_xz'
+        elif proj == 'xy':
+            title = 'velocity field perturbed halo sel 2 XY'
+            x_label = 'x [kpc]'
+            y_label = 'y [kpc]'
+            x_data = 0
+            y_data = 1
+            vx_data = 3
+            vy_data = 4
+            fig_name = 'vel_pert_sel2_xy'
+
+        else:
+            raise ValueError("Invalid projection")
+    elif ispert == False:
+        label = 'unpert'
+        if proj == 'yz':
+            title = 'velocity field unperturbed halo sel 2 YZ'
+            x_label = 'y [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 1
+            y_data = 2
+            vx_data = 4
+            vy_data = 5
+            fig_name = 'vel_nopert_sel2_yz'
+        elif proj == 'xz':
+            title = 'velocity field unperturbed halo sel 2 XZ'
+            x_label = 'x [kpc]'
+            y_label = 'z [kpc]'
+            x_data = 0
+            y_data = 2
+            vx_data = 3
+            vy_data = 5
+            fig_name = 'vel_nopert_sel2_xz'
+        elif proj == 'xy':
+            title = 'velocity field unperturbed halo sel 2 XY'
+            x_label = 'x [kpc]'
+            y_label = 'y [kpc]'
+            x_data = 0
+            y_data = 1
+            vx_data = 3
+            vy_data = 4
+            fig_name = 'vel_nopert_sel2_xy'
+
+        else:
+            raise ValueError("Invalid projection")
+
+        # Create a coarser grid for the starting positions
+
+    x_positions = halo[::coarse_step, x_data]
+    y_positions = halo[::coarse_step, y_data]
+    x_directions = halo[::coarse_step, vx_data]
+    y_directions = halo[::coarse_step, vy_data]
+
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.quiver(x_positions, y_positions, x_directions, y_directions,
+              scale=arrow_scale, width=arrow_width, color='blue', alpha=0.5, label=label,
+              edgecolors='black', linewidths=0.5)
+
+    # fig, ax = plt.subplots(figsize=(8, 8))
+    # ax.quiver(no_pert[:, x_data], no_pert[:, y_data],
+    #           no_pert[:, vx_data], no_pert[:, vy_data],
+    #           scale=1500, width=0.005, color='blue', alpha=0.8, label='no pert')
+
+    # ax.scatter(pert[:, x_data], pert[:, y_data], s=1, color='red', alpha=0.8, label='pert')
+    #
+
+    # Set axis labels
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+
+    # LMC orbit plot in the projection
+    ax.plot(lmc[:, x_data], lmc[:, y_data], linestyle='-', color='green', alpha=0.8, label='lmc')
+    # ax.scatter(pert[:, x_data], pert[:, y_data], s=2, color='violet', alpha=0.8, label='pert pos')
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    ax.legend()
+    ax.set_aspect('equal')
+    #save the plot to a high resolution image
+    plt.savefig('../../media/imgs/sel2/'+fig_name+'.png', dpi=300)
+    # Show the plot
+    plt.show()
+
 
 
 def hist(halo, orb, proj):
