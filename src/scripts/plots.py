@@ -438,6 +438,8 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     fig.colorbar(contour_filled2, cax=cax)
     # Add a general title for the entire figure
     fig.suptitle('Density Contours in proj '+proj, fontsize=24)
+    plt.savefig('../../media/imgs/sel2' + 'Lmag_pos' +figname+ '.png', bbox_inches='tight', dpi=300)
+
     plt.show()
     #     # Set the figure size
     #     fig, ax = plt.subplots(figsize=(8, 8))
