@@ -330,6 +330,99 @@ def LMC_plot(orb_pos, proj):
         LMC_yz.show()
 
 
+# # Function to compute and plot density countours
+def comparison_density_contour_plt(halo1, halo2, lmc, proj):
+    if proj == "yz":
+        title = "MW LMC perturbed halo YZ"
+        figname = "density_contour_yz"
+        x_label = "y [kpc]"
+        y_label = "z [kpc]"
+        x_data = 1
+        y_data = 2
+    elif proj == "xz":
+        title = "MW LMC perturbed halo XZ"
+        figname = "density_contour_xz"
+        x_label = "x [kpc]"
+        y_label = "z [kpc]"
+        x_data = 0
+        y_data = 2
+    elif proj == "xy":
+        title = "MW LMC perturbed halo XY"
+        figname = "density_contour_xy"
+        x_label = "x [kpc]"
+        y_label = "y [kpc]"
+        x_data = 0
+        y_data = 1
+    # Calculate min and max
+    xmin_1, xmax_1 = halo1[:, x_data].min(), halo1[:, x_data].max()
+    ymin_1, ymax_1 = halo1[:, y_data].min(), halo1[:, y_data].max()
+
+    xmin_2, xmax_2 = halo2[:, x_data].min(), halo2[:, x_data].max()
+    ymin_2, ymax_2 = halo2[:, y_data].min(), halo2[:, y_data].max()
+    
+    #Calculate min and max for both halos
+    xmin = min(xmin_1, xmin_2)
+    xmax = max(xmax_1, xmax_2)
+    ymin = min(ymin_1, ymin_2)
+    ymax = max(ymax_1, ymax_2)
+    # Create a meshgrid for the contour plot
+    xx, yy = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
+
+    # Estimate the PDF using Gaussian kernel density estimation
+    positions = np.vstack([xx.ravel(), yy.ravel()])
+    values1 = np.vstack([halo1[:, x_data], halo1[:, y_data]])
+    values2 = np.vstack([halo2[:, x_data], halo2[:, y_data]])
+    kernel1 = st.gaussian_kde(values1)
+    kernel2 = st.gaussian_kde(values2)
+    pdf1 = np.reshape(kernel1(positions).T, xx.shape)
+    pdf2 = np.reshape(kernel2(positions).T, xx.shape)
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
+    
+
+    # Contour plot for the first subplot
+    contour_filled1 = ax1.contourf(xx, yy, pdf, cmap="viridis")
+    ax1.contour(xx, yy, pdf1, colors="black", alpha=0.8, linewidths=0.5)
+    fig.colorbar(contour_filled1, ax=ax1, shrink=0.8, extend="both")
+
+    contour_filled2 = ax2.contourf(xx, yy, pdf, cmap="viridis")
+    ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
+    fig.colorbar(contour_filled2, ax=ax2, shrink=0.8, extend="both")
+    
+    plt.show()
+    #     # Set the figure size
+    #     fig, ax = plt.subplots(figsize=(8, 8))
+
+    # LMC orbit plot in the projection
+    # ax.plot(
+    #     lmc[:, x_data],
+    #     lmc[:, y_data],
+    #     linestyle="-",
+    #     color="cyan",
+    #     alpha=0.8,
+    #     label="lmc",
+    # )
+#     # Set the aspect ratio to 'equal'
+#     ax.set_aspect("equal")
+#     # Contour plot
+#     # Contour filled
+#     contour_filled = ax.contourf(xx, yy, pdf, cmap="viridis")
+#     # Contour lines
+#     ax.contour(xx, yy, pdf, colors="black", alpha=0.8, linewidths=0.5)
+#     # Add a colorbar
+#     fig.colorbar(contour_filled, ax=ax, shrink=0.8, extend="both")
+
+#     # # Scatter plot
+#     # ax.scatter(halo[:, x_data], halo[:, y_data], s=5, c='white', alpha=0.5)
+
+#     # Set labels and title
+#     ax.set_xlabel("x")
+#     ax.set_ylabel("y")
+#     ax.set_title("Particle Density Contour Plot (x-y projection)")
+
+#     # Display the plot
+#     plt.show()
+
 # Function to compute and plot density countours
 def density_contour_plt(halo, lmc, proj):
     if proj == "yz":
@@ -398,7 +491,6 @@ def density_contour_plt(halo, lmc, proj):
 
     # Display the plot
     plt.show()
-
 
 # Function to plot histogram of sel2 particles plus LMC orbit
 def hist_orbit_plt(halo, lmc, proj, coarse_step, arrow_scale, arrow_width, ispert):
