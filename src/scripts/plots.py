@@ -33,15 +33,11 @@ def hist_r_l(halo):
     # Figure using matplotlib
     fig, ax = plt.subplots(1, 1, figsize=(5, 5))
     ax.set_ylabel(
-        r"Magnitud momento inicial  [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
+        r"Initial angular momentum magnitude  [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
         fontsize=8,
     )
-    ax.set_xlabel("Distancia desde el centro del halo [kpc]", fontsize=10)
-    ax.set_ylabel(
-        r"Magnitud momento angular inicial [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
-        fontsize=10,
-    )
-    plt.suptitle("Ang momenta vs position in mag unperturbed", fontsize=15)
+    ax.set_xlabel("Distance from halo center [kpc]", fontsize=10)
+    plt.suptitle(r" [$L_mag$(pos_mag)] unperturbed", fontsize=15)
     im = plt.imshow(
         np.log10(hist_r_L_rot.T),
         extent=[50, 250, 0, 50000],
