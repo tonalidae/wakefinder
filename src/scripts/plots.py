@@ -535,7 +535,7 @@ def density_contour_plt(halo, lmc, proj):
     # Display the plot
     plt.show()
 
-def compartison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arrow_width):
+def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arrow_width):
     if proj == "yz":
         title = "MW LMC perturbed halo YZ"
         figname = "hist_orb_pert_yz"
@@ -593,9 +593,6 @@ def compartison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arr
 
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
-        # Create a 2D histogram
-    hist, xedges, yedges = np.histogram2d(halo[:, x_data], halo[:, y_data], bins=30)
-
 
     # Quiver plot and 2D histogram for the first subplot
     ax1.quiver(x1_positions, y1_positions, x1_directions, y1_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label=label, edgecolors="black", linewidths=0.5)
