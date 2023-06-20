@@ -381,11 +381,11 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     
 
     # Contour plot for the first subplot
-    contour_filled1 = ax1.contourf(xx, yy, pdf, cmap="viridis")
+    contour_filled1 = ax1.contourf(xx, yy, pdf1, cmap="viridis")
     ax1.contour(xx, yy, pdf1, colors="black", alpha=0.8, linewidths=0.5)
     fig.colorbar(contour_filled1, ax=ax1, shrink=0.8, extend="both")
 
-    contour_filled2 = ax2.contourf(xx, yy, pdf, cmap="viridis")
+    contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis")
     ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
     fig.colorbar(contour_filled2, ax=ax2, shrink=0.8, extend="both")
     
