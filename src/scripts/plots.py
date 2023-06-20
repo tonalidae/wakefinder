@@ -49,9 +49,9 @@ def hist_r_l(halo):
     )
     plt.tight_layout()
     plt.show()
+    plt.savefig('./../media/imgs/wakefinder/' + 'Lmag_pos' + '.png', bbox_inches='tight', dpi=300)
     return im
-    # plt.savefig('./../media/imgs/wakefinder/' + 'Lmag_pos' + '.png', bbox_inches='tight', dpi=400)
-
+    
 
 def hist_proj_r_l(halo, proj):
     pos = halo[:, 0]
