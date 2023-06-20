@@ -400,7 +400,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     # Create a single colorbar for both subplots
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
-    fig.colorbar(contour_filled1, cax=cax, vmin=global_min, vmax=global_max)
+    fig.colorbar(contour_filled1, cax=cax)
     plt.show()
     #     # Set the figure size
     #     fig, ax = plt.subplots(figsize=(8, 8))
