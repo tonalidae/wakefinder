@@ -49,7 +49,7 @@ def hist_r_l(halo):
     )
     plt.tight_layout()
     plt.show()
-    plt.savefig('./../media/imgs/wakefinder/' + 'Lmag_pos' + '.png', bbox_inches='tight', dpi=300)
+    plt.savefig('../../media/imgs/' + 'Lmag_pos' + '.png', bbox_inches='tight', dpi=300)
     return im
     
 
