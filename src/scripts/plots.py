@@ -37,10 +37,10 @@ def hist_r_l(halo,ispert=False,figname='mw'):
         fontsize=8,
     )
     ax.set_xlabel("Distance from halo center [kpc]", fontsize=10)
-    if ispert == True:
-        plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})$ unperturbed", fontsize=15)
-    elif ispert == False:
-        plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})$ perturbed", fontsize=15)
+    if ispert == False:
+        plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})$ unperturbed halo", fontsize=15)
+    elif ispert == True:
+        plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})$ perturbed halo", fontsize=15)
     im = plt.imshow(
         np.log10(hist_r_L_rot.T),
         extent=[50, 250, 0, 50000],
