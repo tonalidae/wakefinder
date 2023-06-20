@@ -403,10 +403,28 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     # Contour plot for the first subplot
     contour_filled1 = ax1.contourf(xx, yy, pdf1, cmap="viridis", norm=norm, levels=levels)
     ax1.contour(xx, yy, pdf1, colors="black", alpha=0.8, linewidths=0.5)
+    #LMC orbit plot in the projection
+    ax1.plot(
+        lmc[:, x_data],
+        lmc[:, y_data],
+        linestyle="-",
+        color="cyan",
+        alpha=0.8,
+        label="lmc",
+    )
     # fig.colorbar(contour_filled1, ax=ax1, shrink=0.8, extend="both")
 
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis", norm=norm, levels=levels)
     ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
+        #LMC orbit plot in the projection
+    ax2.plot(
+        lmc[:, x_data],
+        lmc[:, y_data],
+        linestyle="-",
+        color="cyan",
+        alpha=0.8,
+        label="lmc",
+    )
     # fig.colorbar(contour_filled2, ax=ax2, shrink=0.8, extend="both")
     
     # Create a single colorbar for both subplots
@@ -417,15 +435,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     #     # Set the figure size
     #     fig, ax = plt.subplots(figsize=(8, 8))
 
-    # LMC orbit plot in the projection
-    # ax.plot(
-    #     lmc[:, x_data],
-    #     lmc[:, y_data],
-    #     linestyle="-",
-    #     color="cyan",
-    #     alpha=0.8,
-    #     label="lmc",
-    # )
+
 #     # Set the aspect ratio to 'equal'
 #     ax.set_aspect("equal")
 #     # Contour plot
