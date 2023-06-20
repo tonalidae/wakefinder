@@ -41,7 +41,7 @@ def hist_r_l(halo):
         r"Magnitud momento angular inicial [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
         fontsize=10,
     )
-    plt.suptitle("L mag vs pos mag halo perturbado", fontsize=15)
+    plt.suptitle("Ang momenta vs position in mag unperturbed", fontsize=15)
     im = plt.imshow(
         np.log10(hist_r_L_rot.T),
         extent=[50, 250, 0, 50000],

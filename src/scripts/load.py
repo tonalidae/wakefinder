@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+import os
 
 def txt(filename):
     """ Read data from a text file.
@@ -12,6 +13,8 @@ def txt(filename):
         txt_data : array
             Data read from the text file.
     """
+    current_directory = os.getcwd()
+    print(current_directory)
     txt_data = np.loadtxt('../../data/'+filename+'.txt', delimiter=' ')
     return txt_data
 #More functions to read data in different formats can be added here
