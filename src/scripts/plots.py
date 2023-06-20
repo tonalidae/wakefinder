@@ -5,7 +5,7 @@ import plotly.figure_factory as ff
 import scipy.stats as st
 
 
-def hist_r_l(halo):
+def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
 
     Parameters
@@ -37,7 +37,10 @@ def hist_r_l(halo):
         fontsize=8,
     )
     ax.set_xlabel("Distance from halo center [kpc]", fontsize=10)
-    plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})$ unperturbed", fontsize=15)
+    if ispert == True:
+        plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})$ unperturbed", fontsize=15)
+    elif ispert == False:
+        plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})$ perturbed", fontsize=15)
     im = plt.imshow(
         np.log10(hist_r_L_rot.T),
         extent=[50, 250, 0, 50000],
@@ -49,7 +52,7 @@ def hist_r_l(halo):
     )
     plt.tight_layout()
     plt.show()
-    plt.savefig('../../media/imgs/' + 'Lmag_pos' + '.png', bbox_inches='tight', dpi=300)
+    plt.savefig('../../media/imgs/' + 'Lmag_pos' +figname+ '.png', bbox_inches='tight', dpi=300)
     return im
     
 
@@ -74,6 +77,7 @@ def hist_proj_r_l(halo, proj):
         r"$\mathrm{r}_x [ \mathrm{kpc}]$",
         fontsize=10,
     )
+    
     plt.suptitle(r"$\mathrm{L}_{\mathrm{x}}(\mathrm{r}_{\mathrm{x}})$ unperturbed", fontsize=15)
 
     im = plt.imshow(
@@ -111,7 +115,7 @@ def hist_L_r_low(pos, ang_m,figname):
     )
     ax.set_xlabel(r"Distance magnitudes  in [$\mathrm{kpc}$]", fontsize=8)
     ax.set_ylabel(
-        r"$ \mathrm{L_{mag}}[\mathrm{low}] in[ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}]$",
+        r"$ \mathrm{L_{mag}}[\mathrm{low}] \,\mathrm{in} \,[ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}]$",
         fontsize=8,
     )
     plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})[\mathrm{low}]$ unperturbed", fontsize=15)
