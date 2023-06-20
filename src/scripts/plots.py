@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.figure_factory as ff
 import scipy.stats as st
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from matplotlib.colors import Normalize
 
 def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
@@ -376,17 +377,26 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     kernel2 = st.gaussian_kde(values2)
     pdf1 = np.reshape(kernel1(positions).T, xx.shape)
     pdf2 = np.reshape(kernel2(positions).T, xx.shape)
+    # Normalize the color map using the global minimum and maximum values
+    norm = Normalize(vmin=global_min, vmax=global_max)
+
+    # Calculate global minimum and maximum values for both PDFs
+    global_min = min(pdf1.min(), pdf2.min())
+    global_max = max(pdf1.max(), pdf2.max())
+
+
+
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
     
 
     # Contour plot for the first subplot
-    contour_filled1 = ax1.contourf(xx, yy, pdf1, cmap="viridis")
+    contour_filled1 = ax1.contourf(xx, yy, pdf1, cmap="viridis", norm=norm)
     ax1.contour(xx, yy, pdf1, colors="black", alpha=0.8, linewidths=0.5)
     # fig.colorbar(contour_filled1, ax=ax1, shrink=0.8, extend="both")
 
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis")
-    ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
+    ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5, norm=norm)
     # fig.colorbar(contour_filled2, ax=ax2, shrink=0.8, extend="both")
     
     # Create a single colorbar for both subplots
