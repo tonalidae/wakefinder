@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import plotly.figure_factory as ff
 import scipy.stats as st
-
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
@@ -383,12 +383,16 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     # Contour plot for the first subplot
     contour_filled1 = ax1.contourf(xx, yy, pdf1, cmap="viridis")
     ax1.contour(xx, yy, pdf1, colors="black", alpha=0.8, linewidths=0.5)
-    fig.colorbar(contour_filled1, ax=ax1, shrink=0.8, extend="both")
+    # fig.colorbar(contour_filled1, ax=ax1, shrink=0.8, extend="both")
 
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis")
     ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
-    fig.colorbar(contour_filled2, ax=ax2, shrink=0.8, extend="both")
+    # fig.colorbar(contour_filled2, ax=ax2, shrink=0.8, extend="both")
     
+    # Create a single colorbar for both subplots
+    divider = make_axes_locatable(ax2)
+    cax = divider.append_axes("right", size="5%", pad=0.1)
+    fig.colorbar(contour_filled1, cax=cax)
     plt.show()
     #     # Set the figure size
     #     fig, ax = plt.subplots(figsize=(8, 8))
