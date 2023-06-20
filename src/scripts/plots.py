@@ -51,8 +51,8 @@ def hist_r_l(halo,ispert=False,figname='mw'):
         cmap="Greys",
     )
     plt.tight_layout()
-    plt.show()
     plt.savefig('../../media/imgs/' + 'Lmag_pos' +figname+ '.png', bbox_inches='tight', dpi=300)
+    plt.show()
     return im
     
 
