@@ -6,6 +6,7 @@ import scipy.stats as st
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.colors import Normalize
 from matplotlib.colors import LogNorm
+from matplotlib.colors import SymLogNorm
 
 def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
@@ -386,8 +387,11 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     # # Normalize the color map using the global minimum and maximum values
     # norm = Normalize(vmin=global_min, vmax=global_max)
 
-    # Normalize the color map using the LogNorm function
-    norm = LogNorm(vmin=global_min, vmax=global_max)
+    # # Normalize the color map using the LogNorm function
+    # norm = LogNorm(vmin=global_min, vmax=global_max)
+    # Normalize the color map using the SymLogNorm function
+    # You can adjust the `linthresh` parameter to control the range around zero that is mapped linearly
+    norm = SymLogNorm(linthresh=0.01, vmin=global_min, vmax=global_max)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
     
