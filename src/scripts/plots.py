@@ -5,6 +5,7 @@ import plotly.figure_factory as ff
 import scipy.stats as st
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.colors import Normalize
+from matplotlib.colors import LogNorm
 
 def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
@@ -382,8 +383,11 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     global_min = min(pdf1.min(), pdf2.min())
     global_max = max(pdf1.max(), pdf2.max())
 
-    # Normalize the color map using the global minimum and maximum values
-    norm = Normalize(vmin=global_min, vmax=global_max)
+    # # Normalize the color map using the global minimum and maximum values
+    # norm = Normalize(vmin=global_min, vmax=global_max)
+
+    # Normalize the color map using the LogNorm function
+    norm = LogNorm(vmin=global_min, vmax=global_max)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
     
