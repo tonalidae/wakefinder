@@ -595,14 +595,14 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
 
     # Quiver plot and 2D histogram for the first subplot
-    ax1.quiver(x1_positions, y1_positions, x1_directions, y1_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label=label, edgecolors="black", linewidths=0.5)
+    ax1.quiver(x1_positions, y1_positions, x1_directions, y1_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label', edgecolors="black", linewidths=0.5)
     im1 = ax1.imshow(hist.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto")
     ax1.set_title('Plot 1')
     ax1.set_xlabel(x_label)
     ax1.set_ylabel(y_label)
 
     # Quiver plot and 2D histogram for the second subplot
-    ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label=label, edgecolors="black", linewidths=0.5)
+    ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
     im2 = ax2.imshow(hist.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto")
     ax2.set_title('Plot 2')
     ax2.set_xlabel(x_label)
