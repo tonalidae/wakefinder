@@ -394,7 +394,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     norm = SymLogNorm(linthresh=0.01, vmin=global_min, vmax=global_max)
 
     # Define the number of levels for the contour plots
-    num_levels = 20
+    num_levels = 30
     levels = np.linspace(global_min, global_max, num_levels)
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
