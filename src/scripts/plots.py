@@ -109,12 +109,12 @@ def hist_L_r_low(pos, ang_m,figname):
         vmax=5,
         cmap="Greys",
     )
-    ax.set_xlabel(r"distancias en [$\mathrm{kpc}$]", fontsize=8)
+    ax.set_xlabel(r"Distance magnitudes  in [$\mathrm{kpc}$]", fontsize=8)
     ax.set_ylabel(
-        r"Momento angular inicial [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
+        r"$ \mathrm{L_{mag}}[\mathrm{low}] in[ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}]$",
         fontsize=8,
     )
-    plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})[\mathrm{low L}]$ unperturbed", fontsize=15)
+    plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})[\mathrm{low}]$ unperturbed", fontsize=15)
     # ax.set_title("Partículas con momento angular inicial bajo", fontsize=12, y=1.05)
     plt.savefig('../../media/imgs/'+'histlow'+figname+'.png', bbox_inches='tight', dpi = 300)
     plt.show()
