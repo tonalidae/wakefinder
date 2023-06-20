@@ -67,15 +67,15 @@ def hist_proj_r_l(halo, proj):
     # Figure using matplotlib
     fig, ax = plt.subplots(1, 1, figsize=(5, 5))
     ax.set_ylabel(
-        r"Momento angular x  [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
+        r"$ \mathrm{L}_x [ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}]$",
         fontsize=8,
     )
-    ax.set_xlabel("Distancia desde el centro del halo [kpc]", fontsize=10)
-    ax.set_ylabel(
-        r"momento angular inicial [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
+    ax.set_xlabel(
+        r"$\mathrm{r}_x [ \mathrm{kpc}]$",
         fontsize=10,
     )
-    plt.suptitle("L_x vs R_x halo perturbado", fontsize=15)
+    plt.suptitle(r"$\mathrm{L}_{\mathrm{x}}(\mathrm{r}_{\mathrm{mag}})$ unperturbed", fontsize=15)
+
     im = plt.imshow(
         np.log10(hist_r_L_rot.T),
         extent=[50, 250, 0, 50000],
