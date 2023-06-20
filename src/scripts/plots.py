@@ -37,7 +37,7 @@ def hist_r_l(halo):
         fontsize=8,
     )
     ax.set_xlabel("Distance from halo center [kpc]", fontsize=10)
-    plt.suptitle(r" $\text{L}_{mag}(\text{pos}_{mag})$ unperturbed", fontsize=15)
+    plt.suptitle(r"$L_{\mathrm{mag}}(\mathrm{pos}_{\mathrm{mag}})$ unperturbed", fontsize=15)
     im = plt.imshow(
         np.log10(hist_r_L_rot.T),
         extent=[50, 250, 0, 50000],
