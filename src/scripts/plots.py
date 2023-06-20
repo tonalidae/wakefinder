@@ -74,7 +74,7 @@ def hist_proj_r_l(halo, proj):
         r"$\mathrm{r}_x [ \mathrm{kpc}]$",
         fontsize=10,
     )
-    plt.suptitle(r"$\mathrm{L}_{\mathrm{x}}(\mathrm{r}_{\mathrm{mag}})$ unperturbed", fontsize=15)
+    plt.suptitle(r"$\mathrm{L}_{\mathrm{x}}(\mathrm{r}_{\mathrm{x}})$ unperturbed", fontsize=15)
 
     im = plt.imshow(
         np.log10(hist_r_L_rot.T),
@@ -90,7 +90,7 @@ def hist_proj_r_l(halo, proj):
     return im
 
 
-def hist_L_r_low(pos, ang_m):
+def hist_L_r_low(pos, ang_m,figname):
     r = np.arange(50, 200, 10)
     L = np.arange(9, 50000, 2500)
     hist_r_L = np.zeros((len(r), len(L)))
@@ -111,11 +111,12 @@ def hist_L_r_low(pos, ang_m):
     )
     ax.set_xlabel(r"distancias en [$\mathrm{kpc}$]", fontsize=8)
     ax.set_ylabel(
-        r"Momhisento angular inicial [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
+        r"Momento angular inicial [$ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}$]",
         fontsize=8,
     )
-    ax.set_title("Partículas con momento angular inicial bajo", fontsize=12, y=1.05)
-    # plt.savefig('../../media/imgs/wakefinder/'+figname+'.png', bbox_inches='tight', dpi = 400)
+    plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})[\mathrm{low L}]$ unperturbed", fontsize=15)
+    # ax.set_title("Partículas con momento angular inicial bajo", fontsize=12, y=1.05)
+    plt.savefig('../../media/imgs/'+'histlow'+figname+'.png', bbox_inches='tight', dpi = 300)
     plt.show()
     return hist_L_r_low
 
