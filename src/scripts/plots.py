@@ -438,7 +438,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     fig.colorbar(contour_filled2, cax=cax)
     # Add a general title for the entire figure
     fig.suptitle('Density Contours in proj '+proj, fontsize=24)
-    plt.savefig('../../media/imgs/sel2' + 'Lmag_pos' +figname+ '.png', bbox_inches='tight', dpi=300)
+    plt.savefig('../../media/imgs/sel2/' + 'Lmag_pos' +figname+ '.png', bbox_inches='tight', dpi=300)
 
     plt.show()
     #     # Set the figure size
@@ -534,6 +534,93 @@ def density_contour_plt(halo, lmc, proj):
 
     # Display the plot
     plt.show()
+
+def compartison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arrow_width):
+    if proj == "yz":
+        title = "MW LMC perturbed halo YZ"
+        figname = "hist_orb_pert_yz"
+        x_label = "y [kpc]"
+        y_label = "z [kpc]"
+        x_data = 1
+        y_data = 2
+        vx_data = 4
+        vy_data = 5
+    elif proj == "xz":
+        title = "MW LMC perturbed halo XZ"
+        figname = "hist_orb_pert_xz"
+        x_label = "x [kpc]"
+        y_label = "z [kpc]"
+        x_data = 0
+        y_data = 2
+        vx_data = 3
+        vy_data = 5
+    elif proj == "xy":
+        title = "MW LMC perturbed halo XY"
+        figname = "hist_orb_pert_xy"
+        x_label = "x [kpc]"
+        y_label = "y [kpc]"
+        x_data = 0
+        y_data = 1
+        vx_data = 3
+        vy_data = 4
+    else:
+        raise ValueError("Invalid projection")
+    # Create a coarser grid for the starting positions
+    # Adjust this value to control the density of arrows
+    x1_positions = halo1[::coarse_step, x_data]
+    y1_positions = halo1[::coarse_step, y_data]
+    x1_directions = halo1[::coarse_step, vx_data]
+    y1_directions = halo1[::coarse_step, vy_data]
+
+    x2_positions = halo2[::coarse_step, x_data]
+    y2_positions = halo2[::coarse_step, y_data]
+    x2_directions = halo2[::coarse_step, vx_data]
+    y2_directions = halo2[::coarse_step, vy_data]
+
+    #Get the min and max values of the halo 
+
+    # Calculate the 2D histogram for the first dataset
+    hist1, xedges, yedges = np.histogram2d(halo1[:, x_data], halo1[:, y_data], bins=30)
+
+    # Calculate the 2D histogram for the second dataset using the same xedges and yedges
+    hist2, _, _ = np.histogram2d(halo2[:, x_data], halo2[:, y_data], bins=(xedges, yedges))
+
+        # Normalize the histograms
+    hist1 = hist1 / np.max(hist1)
+    hist2 = hist2 / np.max(hist2)
+    # Create a colormap
+    cmap = plt.get_cmap("viridis")
+
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
+        # Create a 2D histogram
+    hist, xedges, yedges = np.histogram2d(halo[:, x_data], halo[:, y_data], bins=30)
+
+
+    # Quiver plot and 2D histogram for the first subplot
+    ax1.quiver(x1_positions, y1_positions, x1_directions, y1_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label=label, edgecolors="black", linewidths=0.5)
+    im1 = ax1.imshow(hist.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto")
+    ax1.set_title('Plot 1')
+    ax1.set_xlabel(x_label)
+    ax1.set_ylabel(y_label)
+
+    # Quiver plot and 2D histogram for the second subplot
+    ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label=label, edgecolors="black", linewidths=0.5)
+    im2 = ax2.imshow(hist.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto")
+    ax2.set_title('Plot 2')
+    ax2.set_xlabel(x_label)
+    ax2.set_ylabel(y_label)
+
+    # Create a single colorbar for both subplots
+    divider = make_axes_locatable(ax2)
+    cax = divider.append_axes("right", size="5%", pad=0.1)
+    fig.colorbar(im1, cax=cax)
+
+    # Add a general title for the entire figure
+    fig.suptitle('General Title', fontsize=16)
+
+    plt.show()
+        
 
 # Function to plot histogram of sel2 particles plus LMC orbit
 def hist_orbit_plt(halo, lmc, proj, coarse_step, arrow_scale, arrow_width, ispert):
