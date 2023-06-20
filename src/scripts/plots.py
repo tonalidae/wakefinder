@@ -377,15 +377,13 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     kernel2 = st.gaussian_kde(values2)
     pdf1 = np.reshape(kernel1(positions).T, xx.shape)
     pdf2 = np.reshape(kernel2(positions).T, xx.shape)
-    # Normalize the color map using the global minimum and maximum values
-    norm = Normalize(vmin=global_min, vmax=global_max)
 
     # Calculate global minimum and maximum values for both PDFs
     global_min = min(pdf1.min(), pdf2.min())
     global_max = max(pdf1.max(), pdf2.max())
 
-
-
+    # Normalize the color map using the global minimum and maximum values
+    norm = Normalize(vmin=global_min, vmax=global_max)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
     
