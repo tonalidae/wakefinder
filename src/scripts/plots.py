@@ -626,6 +626,8 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     # Set the x and y limits for the first subplot based on halo 2 min and max values
     ax1.set_xlim(x_min_halo2, x_max_halo2)
     ax1.set_ylim(y_min_halo2, y_max_halo2)
+    # Set the aspect ratio to be equal for the first subplot while keeping xlim and ylim values
+    ax1.set_aspect('equal', adjustable='datalim')   
     # LMC orbit plot in the projection
     ax1.plot(
         lmc[:, x_data],
@@ -646,6 +648,8 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     ax2.set_xlim(x_min_halo2, x_max_halo2)
     ax2.set_ylim(y_min_halo2, y_max_halo2)
     # LMC orbit plot in the projection
+    # Set the aspect ratio to be equal for the second subplot while keeping xlim and ylim values    
+    ax2.set_aspect('equal', adjustable='datalim')
     ax2.plot(
         lmc[:, x_data],
         lmc[:, y_data],
