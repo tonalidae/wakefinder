@@ -610,15 +610,6 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     ax1.set_xlabel(x_label)
     ax1.set_ylabel(y_label)
 
-    # Add annotations to the first subplot
-    for i in range(hist1.shape[0]):
-        for j in range(hist1.shape[1]):
-            density_value = hist1[i, j]
-            x_coord = xedges[i]
-            y_coord = yedges[j]
-            ax1.annotate(f"{density_value:.2f}", (x_coord, y_coord), color='white', fontsize=8, ha='center', va='center')
-
-
 
     # Quiver plot and 2D histogram for the second subplot
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
@@ -627,13 +618,6 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     ax2.set_xlabel(x_label)
     ax2.set_ylabel(y_label)
     
-    # Add annotations to the second subplot
-    for i in range(hist2.shape[0]):
-        for j in range(hist2.shape[1]):
-            density_value_2 = hist2[i, j]
-            x_coord2 = xedges_2[i]
-            y_coord2 = yedges_2[j]
-            ax2.annotate(f"{density_value_2:.2f}", (x_coord2, y_coord2), color='white', fontsize=8, ha='center', va='center')
 
     # Create a single colorbar for both subplots
     divider = make_axes_locatable(ax2)
