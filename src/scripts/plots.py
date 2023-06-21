@@ -596,7 +596,7 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
 
     #Get the min and max values of the halo 
     # Calculate the 2D histograms and normalize them
-    hist1, xedges, yedges = np.histogram2d(halo1[:, x_data], halo1[:, y_data], bins=30)
+    hist1, xedges, yedges = np.histogram2d(halo1[:, x_data], halo1[:, y_data], bins=100)
     hist2, _, _ = np.histogram2d(halo2[:, x_data], halo2[:, y_data], bins=(xedges, yedges))
     hist1 = hist1 / np.max(hist1)
     hist2 = hist2 / np.max(hist2)
