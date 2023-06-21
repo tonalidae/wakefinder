@@ -541,6 +541,18 @@ def density_contour_plt(halo, lmc, proj):
     plt.show()
 
 def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arrow_width):
+    """
+    Create a comparison plot of two halos with quiver plots and 2D histograms.
+
+    Parameters:
+    - halo1: First halo dataset
+    - halo2: Second halo dataset
+    - proj: Projection type ('yz', 'xz', or 'xy')
+    - coarse_step: Step size for coarser grid in quiver plot
+    - arrow_scale: Scale for arrows in quiver plot
+    - arrow_width: Width for arrows in quiver plot
+    """
+    # Define projection-specific settings
     if proj == "yz":
         title = "MW LMC perturbed halo YZ"
         figname = "hist_orb_pert_yz"
@@ -594,6 +606,13 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     global_min = min(hist1.min(), hist2.min())
     global_max = max(hist1.max(), hist2.max())
 
+    # Calculate the min and max values of halo 2 for x and y axes
+    x_min_halo2 = np.min(halo2[:, x_data])
+    x_max_halo2 = np.max(halo2[:, x_data])
+    y_min_halo2 = np.min(halo2[:, y_data])
+    y_max_halo2 = np.max(halo2[:, y_data])
+
+# ...
     # Create the figure and subplots
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
 
@@ -603,6 +622,9 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     ax1.set_title('Plot 1')
     ax1.set_xlabel(x_label)
     ax1.set_ylabel(y_label)
+    # Set the x and y limits for the first subplot based on halo 2 min and max values
+    ax1.set_xlim(x_min_halo2, x_max_halo2)
+    ax1.set_ylim(y_min_halo2, y_max_halo2)
 
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
@@ -610,11 +632,15 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     ax2.set_title('Plot 2')
     ax2.set_xlabel(x_label)
     ax2.set_ylabel(y_label)
+    # Set the x and y limits for the first subplot based on halo 2 min and max values
+    ax2.set_xlim(x_min_halo2, x_max_halo2)
+    ax2.set_ylim(y_min_halo2, y_max_halo2)
+
 
     # Add a colorbar for both subplots
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
-    fig.colorbar(im1, cax=cax)
+    fig.colorbar(im2, cax=cax)
 
     # Add a general title for the entire figure
     fig.suptitle('General Title', fontsize=16)
