@@ -666,34 +666,6 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
 
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
-    
-    
-    #Identify region to calculate gradient
-    x_grad_min, x_grad_max = -50, 0
-    y_grad_min, y_grad_max = -50, 0
-    
-    #filter data
-    filtered_x_halo1 = np.where((halo1[:, x_data] > x_grad_min) & (halo1[:, x_data] < x_grad_max))
-    filtered_y_halo1 = np.where((halo1[:, y_data] > y_grad_min) & (halo1[:, y_data] < y_grad_max))
-    
-    filtered_x_halo2 = np.where((halo2[:, x_data] > x_grad_min) & (halo2[:, x_data] < x_grad_max))
-    filtered_y_halo2 = np.where((halo2[:, y_data] > y_grad_min) & (halo2[:, y_data] < y_grad_max))
-    
-    # Calculate the gradient for both datasets
-    grad_halo1_x, grad_halo1_y = np.gradient(filtered_x_halo1), np.gradient(filtered_y_halo1)
-    grad_halo2_x, grad_halo2_y = np.gradient(filtered_x_halo2), np.gradient(filtered_y_halo2)
-    print(f"Gradient of unperturbed halo in {proj[0]} direction: {np.mean(grad_halo1_x):.2f}")
-    print(f"Gradient of unperturbed halo in {proj[1]} direction: {np.mean(grad_halo1_y):.2f}")
-    print(f"Gradient of perturbed halo in {proj[0]} direction: {np.mean(grad_halo2_x):.2f}")
-    print(f"Gradient of perturbed halo in {proj[1]} direction: {np.mean(grad_halo2_y):.2f}")
-    # # Calculate the standard deviation of the arrow directions for both datasets
-    # std_dev_halo1 = np.sqrt(np.var(halo1[:, vx_data]) + np.var(halo1[:, vy_data]))
-    # std_dev_halo2 = np.sqrt(np.var(halo2[:, vx_data]) + np.var(halo2[:, vy_data]))
-
-    # # Print the standard deviation values
-    # print(f"Standard deviation of arrow directions for unperturbed halo {proj}: {std_dev_halo1:.2f}")
-    # print(f"Standard deviation of arrow directions for perturbed halo {proj}: {std_dev_halo2:.2f}")
-    # # Display the plots
     plt.show()
     
 
