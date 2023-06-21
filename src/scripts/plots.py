@@ -662,9 +662,17 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
 
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
+    
+    # Calculate the standard deviation of the arrow directions for both datasets
+    std_dev_halo1 = np.sqrt(np.var(halo1[:, vx_data]) + np.var(halo1[:, vy_data]))
+    std_dev_halo2 = np.sqrt(np.var(halo2[:, vx_data]) + np.var(halo2[:, vy_data]))
 
-    # Display the plots
+    # Print the standard deviation values
+    print(f"Standard deviation of arrow directions for unperturbed halo {proj}: {std_dev_halo1:.2f}")
+    print(f"Standard deviation of arrow directions for perturbed halo {proj}: {std_dev_halo2:.2f}")
+        # Display the plots
     plt.show()
+    
 
 # Function to plot histogram of sel2 particles plus LMC orbit
 def hist_orbit_plt(halo, lmc, proj, coarse_step, arrow_scale, arrow_width, ispert):
