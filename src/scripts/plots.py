@@ -583,43 +583,35 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     y2_directions = halo2[::coarse_step, vy_data]
 
     #Get the min and max values of the halo 
-
-    # Calculate the 2D histogram for the first dataset
+    # Calculate the 2D histograms and normalize them
     hist1, xedges, yedges = np.histogram2d(halo1[:, x_data], halo1[:, y_data], bins=30)
-
-    # Calculate the 2D histogram for the second dataset using the same xedges and yedges
     hist2, _, _ = np.histogram2d(halo2[:, x_data], halo2[:, y_data], bins=(xedges, yedges))
-
-        # Normalize the histograms
     hist1 = hist1 / np.max(hist1)
     hist2 = hist2 / np.max(hist2)
-    # Create a colormap
-    cmap = plt.get_cmap("viridis")
 
-        # Calculate global minimum and maximum values for both datasets
+    # Set up the colormap and calculate global min and max values
+    cmap = plt.get_cmap("viridis")
     global_min = min(hist1.min(), hist2.min())
     global_max = max(hist1.max(), hist2.max())
 
-    
+    # Create the figure and subplots
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
 
-    # Quiver plot and 2D histogram for the first subplot
+    # First subplot: quiver plot and 2D histogram
     ax1.quiver(x1_positions, y1_positions, x1_directions, y1_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label', edgecolors="black", linewidths=0.5)
     im1 = ax1.imshow(hist1.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", vmin=global_min, vmax=global_max)
     ax1.set_title('Plot 1')
     ax1.set_xlabel(x_label)
     ax1.set_ylabel(y_label)
 
-
-    # Quiver plot and 2D histogram for the second subplot
+    # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
     im2 = ax2.imshow(hist2.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", vmin=global_min, vmax=global_max)
     ax2.set_title('Plot 2')
     ax2.set_xlabel(x_label)
     ax2.set_ylabel(y_label)
-    
 
-    # Create a single colorbar for both subplots
+    # Add a colorbar for both subplots
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
     fig.colorbar(im1, cax=cax)
@@ -627,8 +619,8 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     # Add a general title for the entire figure
     fig.suptitle('General Title', fontsize=16)
 
+    # Display the plots
     plt.show()
-        
 
 # Function to plot histogram of sel2 particles plus LMC orbit
 def hist_orbit_plt(halo, lmc, proj, coarse_step, arrow_scale, arrow_width, ispert):
