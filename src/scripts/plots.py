@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import plotly.figure_factory as ff
 import scipy.stats as st
+from scipy.stats import skew
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.colors import Normalize
 from matplotlib.colors import LogNorm
@@ -637,6 +638,9 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         alpha=0.8,
         label="lmc",
     )
+    # Calculate the skewness of the halo
+    unpert_skew_x = skew(hist1, axis=0)
+    unpert_skew_y = skew(hist1, axis=1)
 
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
@@ -658,12 +662,19 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         alpha=0.8,
         label="lmc",
     )
+    # Calculate the skewness of the halo
+    pert_skew_x = skew(hist1, axis=0)
+    pert_skew_y = skew(hist1, axis=1)
 
     # Add a colorbar for both subplots
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
     fig.colorbar(im2, cax=cax)
 
+    print(f"Skewness of unperturbed halo in{proj[0]} direction: {unpert_skew_x}")
+    print(f"Skewness of unperturbed halo in {proj[1]} direction: {unpert_skew_y}")
+    print(f"Skewness of perturbed halo in {proj[0]} direction: {pert_skew_x}")
+    print(f"Skewness of perturbed halo in {proj[1]} direction: {pert_skew_y}")
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
     plt.show()
