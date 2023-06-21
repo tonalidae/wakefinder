@@ -663,8 +663,8 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         label="lmc",
     )
     # Calculate the skewness of the halo
-    pert_skew_x = skew(hist1, axis=0)
-    pert_skew_y = skew(hist1, axis=1)
+    pert_skew_x = skew(hist2, axis=0)
+    pert_skew_y = skew(hist2, axis=1)
 
     # Add a colorbar for both subplots
     divider = make_axes_locatable(ax2)
