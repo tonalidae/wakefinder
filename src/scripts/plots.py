@@ -420,7 +420,9 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     # Set zoom
     ax1.set_xlim(xmin_2, xmax_2)
     ax1.set_ylim(ymin_2, ymax_2)
-
+    # Set equal aspect ratio
+    ax1.set_aspect("equal", "box")
+    
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis", norm=norm, levels=levels)
     ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
         #LMC orbit plot in the projection
@@ -438,6 +440,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     # Set zoom
     ax2.set_xlim(xmin_2, xmax_2)
     ax2.set_ylim(ymin_2, ymax_2)
+    ax2.set_aspect("equal", "box")
     # Create a single colorbar for both subplots
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
