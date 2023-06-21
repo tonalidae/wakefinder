@@ -671,10 +671,15 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     cax = divider.append_axes("right", size="5%", pad=0.1)
     fig.colorbar(im2, cax=cax)
 
-    print(f"Skewness of unperturbed halo in{proj[0]} direction: {unpert_skew_x}")
-    print(f"Skewness of unperturbed halo in {proj[1]} direction: {unpert_skew_y}")
-    print(f"Skewness of perturbed halo in {proj[0]} direction: {pert_skew_x}")
-    print(f"Skewness of perturbed halo in {proj[1]} direction: {pert_skew_y}")
+    unpert_mean_skew_x = np.mean(unpert_skew_x)
+    unpert_mean_skew_y = np.mean(unpert_skew_y)
+    pert_mean_skew_x = np.mean(pert_skew_x)
+    pert_mean_skew_y = np.mean(pert_skew_y)
+    
+    print(f"Skewness of unperturbed halo in{proj[0]} direction: {unpert_mean_skew_x}")
+    print(f"Skewness of unperturbed halo in {proj[1]} direction: {unpert_mean_skew_y}")
+    print(f"Skewness of perturbed halo in {proj[0]} direction: {pert_mean_skew_x}")
+    print(f"Skewness of perturbed halo in {proj[1]} direction: {pert_mean_skew_y}")
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
     plt.show()
