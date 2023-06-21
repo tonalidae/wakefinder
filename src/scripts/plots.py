@@ -620,13 +620,13 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
 
 
 
-        # Quiver plot and 2D histogram for the second subplot
-        ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
-        im2 = ax2.imshow(hist2.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", vmin=global_min, vmax=global_max)
-        ax2.set_title('Plot 2')
-        ax2.set_xlabel(x_label)
-        ax2.set_ylabel(y_label)
-        
+    # Quiver plot and 2D histogram for the second subplot
+    ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
+    im2 = ax2.imshow(hist2.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", vmin=global_min, vmax=global_max)
+    ax2.set_title('Plot 2')
+    ax2.set_xlabel(x_label)
+    ax2.set_ylabel(y_label)
+    
     # Add annotations to the second subplot
     for i in range(hist2.shape[0]):
         for j in range(hist2.shape[1]):
