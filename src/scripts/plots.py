@@ -540,13 +540,14 @@ def density_contour_plt(halo, lmc, proj):
     # Display the plot
     plt.show()
 
-def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arrow_width):
+def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, arrow_width):
     """
     Create a comparison plot of two halos with quiver plots and 2D histograms.
 
     Parameters:
     - halo1: First halo dataset
     - halo2: Second halo dataset
+    - lmc: Large Magellanic Cloud dataset
     - proj: Projection type ('yz', 'xz', or 'xy')
     - coarse_step: Step size for coarser grid in quiver plot
     - arrow_scale: Scale for arrows in quiver plot
@@ -625,6 +626,15 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     # Set the x and y limits for the first subplot based on halo 2 min and max values
     ax1.set_xlim(x_min_halo2, x_max_halo2)
     ax1.set_ylim(y_min_halo2, y_max_halo2)
+    # LMC orbit plot in the projection
+    ax1.plot(
+        lmc[:, x_data],
+        lmc[:, y_data],
+        linestyle="-",
+        color="cyan",
+        alpha=0.8,
+        label="lmc",
+    )
 
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
@@ -635,7 +645,15 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     # Set the x and y limits for the first subplot based on halo 2 min and max values
     ax2.set_xlim(x_min_halo2, x_max_halo2)
     ax2.set_ylim(y_min_halo2, y_max_halo2)
-
+    # LMC orbit plot in the projection
+    ax2.plot(
+        lmc[:, x_data],
+        lmc[:, y_data],
+        linestyle="-",
+        color="cyan",
+        alpha=0.8,
+        label="lmc",
+    )
 
     # Add a colorbar for both subplots
     divider = make_axes_locatable(ax2)
@@ -643,7 +661,7 @@ def comparison_hist_orbit_plt(halo1, halo2, proj, coarse_step, arrow_scale, arro
     fig.colorbar(im2, cax=cax)
 
     # Add a general title for the entire figure
-    fig.suptitle('General Title', fontsize=16)
+    fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
 
     # Display the plots
     plt.show()
