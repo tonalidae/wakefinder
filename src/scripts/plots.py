@@ -416,7 +416,9 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     ax1.set_title('Unperturbed halo '+proj)  # Add title for the first subplot
     ax1.set_xlabel(x_label)  # Add x-axis label for the first subplot
     ax1.set_ylabel(y_label)  # Add y-axis label for the first subplot
-
+    # Set zoom
+    ax1.set_xlim(xmin_2, xmax_2)
+    ax1.set_ylim(ymin_2, ymax_2)
 
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis", norm=norm, levels=levels)
     ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
@@ -432,7 +434,9 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     ax2.set_title('Perturbed halo '+proj)  # Add title for the second subplot
     ax2.set_xlabel(x_label)  # Add x-axis label for the second subplot
     ax2.set_ylabel(y_label)  # Add y-axis label for the second subplot
-    
+    # Set zoom
+    ax2.set_xlim(xmin_2, xmax_2)
+    ax2.set_ylim(ymin_2, ymax_2)
     # Create a single colorbar for both subplots
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
