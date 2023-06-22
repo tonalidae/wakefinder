@@ -2456,7 +2456,7 @@ def comparison_E_L(halo1, halo2, halo3, halo4, proj, slice=None):
     if slice is None:
         size = halo1.shape[0]
     else:
-        size = min(slice, halo1.shape[0])
+        size = min(slice, halo1.shape[0], halo2.shape[0], halo3.shape[0], halo4.shape[0])
 
     # Create random slices for each halo
     random_slices = [np.random.choice(halo.shape[0], size, replace=False) for halo in [halo1, halo2, halo3, halo4]]
