@@ -1210,11 +1210,11 @@ def plot_3d(arr1, arr2, title):
 
 
 def plot_3d_plt(arr1, lmc, title):
-    fig = plt.figure()
+    fig = plt.figure(dpi=300, figsize=(6,4))
     ax = fig.add_subplot(111, projection='3d')
 
     # 3D scatter plot for arr1
-    scatter = ax.scatter(arr1[:, 0], arr1[:, 1], arr1[:, 2], c=arr1[:, 10], cmap=cm.Greys, s=0.5, alpha=1)
+    scatter = ax.scatter(arr1[:, 0], arr1[:, 1], arr1[:, 2], c=arr1[:, 10], cmap='Purples', s=0.5, alpha=1, label='wake', edgecolors='none')
 
     # 3D line plot for arr2
     ax.plot(lmc[:, 0], lmc[:, 1], lmc[:, 2], color='orange', alpha=0.8)
