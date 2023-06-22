@@ -2380,9 +2380,9 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y2_data = halo2[:, 15][random_slice2]
                 ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
                 ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                ax.xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
-                ax.ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
-                ax.title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
+                ax.set_xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
+                ax.set_ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
+                ax.set_title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2397,9 +2397,9 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y2_data = halo2[:, 15][random_slice2]
                 ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
                 ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                ax.xlabel(r'Momento angular $L_y$ (kpc km/s)', fontsize=14)
-                ax.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
-                ax.title(r'Phase diagram $E$ vs $L_y$', fontsize=20)
+                ax.set_xlabel(r'Momento angular $L_y$ (kpc km/s)', fontsize=14)
+                ax.set_ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
+                ax.set_title(r'Phase diagram $E$ vs $L_y$', fontsize=20)
                 ax.set_aspect('equal', adjustable='box')
                 if x_limits is not None:
                     plt.xlim(x_limits)
@@ -2413,9 +2413,9 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y2_data = halo2[:, 15][random_slice2]
                 ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
                 ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                ax.xlabel(r'Momento angular $L_z$ (kpc km/s)',fontsize=14)
-                ax.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
-                ax.title(r'Phase diagram $E$ vs $L_xz$', fontsize=20)                
+                ax.set_xlabel(r'Momento angular $L_z$ (kpc km/s)',fontsize=14)
+                ax.set_ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
+                ax.set_title(r'Phase diagram $E$ vs $L_xz$', fontsize=20)                
                 ax.set_aspect('equal', adjustable='box')
                 if x_limits is not None:
                     plt.xlim(x_limits)
@@ -2429,9 +2429,9 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y2_data = halo2[:, 15][random_slice2]
                 ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
                 ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                ax.xlabel(r'Momento angular $L_{mag}$ (kpc km/s)',fontsize=14)
-                ax.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)',fontsize=14)
-                ax.title(r'Phase diagram $E$ vs $L_{mag}$', fontsize=20)
+                ax.set_xlabel(r'Momento angular $L_{mag}$ (kpc km/s)',fontsize=14)
+                ax.set_ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)',fontsize=14)
+                ax.set_title(r'Phase diagram $E$ vs $L_{mag}$', fontsize=20)
                 ax.set_aspect('equal', adjustable='box')
                 if x_limits is not None:
                     plt.xlim(x_limits)
