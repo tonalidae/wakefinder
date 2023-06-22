@@ -1227,7 +1227,7 @@ def plot_3d_plt(arr1, lmc, title):
     ax.set_xlabel('x [kpc]')
     ax.set_ylabel('y [kpc]')
     ax.set_zlabel('z [kpc]')
-    ax.set_title(title, fontsize=14)
+    ax.set_title(title, fontsize=12, y=1.05)
 
     # Display the plot
     plt.show()
