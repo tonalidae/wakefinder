@@ -1174,7 +1174,7 @@ def plot_3d(arr1, arr2, title):
             y=arr2[:, 1],
             z=arr2[:, 2],
             mode="lines",
-            marker=dict(size=1, color="red", opacity=0.8),
+            marker=dict(size=1, color="orange", opacity=0.8),
             name="lmc",
         )
     )
