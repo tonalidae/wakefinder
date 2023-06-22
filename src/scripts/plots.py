@@ -2378,29 +2378,29 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 11][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                plt.xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
-                plt.ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
-                plt.title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
+                ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
+                ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
+                ax.xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
+                ax.ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
+                ax.title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
                     plt.ylim(y_limits)
                 # set aspect ratio to be equal
-                plt.gca().set_aspect('equal', adjustable='box')
+                ax.set_aspect('equal', adjustable='box')
                 plt.show()
             elif proj == "y":
                 x_data = halo[:, 12][random_slice]
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 12][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                plt.xlabel(r'Momento angular $L_y$ (kpc km/s)', fontsize=14)
-                plt.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
-                plt.title(r'Phase diagram $E$ vs $L_y$', fontsize=20)
-                plt.gca().set_aspect('equal', adjustable='box')
+                ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
+                ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
+                ax.xlabel(r'Momento angular $L_y$ (kpc km/s)', fontsize=14)
+                ax.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
+                ax.title(r'Phase diagram $E$ vs $L_y$', fontsize=20)
+                ax.set_aspect('equal', adjustable='box')
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2411,12 +2411,12 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 13][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                plt.xlabel(r'Momento angular $L_z$ (kpc km/s)',fontsize=14)
-                plt.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
-                plt.title(r'Phase diagram $E$ vs $L_xz$', fontsize=20)
-                plt.gca().set_aspect('equal', adjustable='box')
+                ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
+                ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
+                ax.xlabel(r'Momento angular $L_z$ (kpc km/s)',fontsize=14)
+                ax.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
+                ax.title(r'Phase diagram $E$ vs $L_xz$', fontsize=20)                
+                ax.set_aspect('equal', adjustable='box')
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2427,12 +2427,12 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 10][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
-                plt.xlabel(r'Momento angular $L_{mag}$ (kpc km/s)',fontsize=14)
-                plt.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)',fontsize=14)
-                plt.title(r'Phase diagram $E$ vs $L_{mag}$', fontsize=20)
-                plt.gca().set_aspect('equal', adjustable='box')
+                ax.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
+                ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
+                ax.xlabel(r'Momento angular $L_{mag}$ (kpc km/s)',fontsize=14)
+                ax.ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)',fontsize=14)
+                ax.title(r'Phase diagram $E$ vs $L_{mag}$', fontsize=20)
+                ax.set_aspect('equal', adjustable='box')
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
