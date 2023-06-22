@@ -163,7 +163,7 @@ def surface_plot(orb_pos, n_vector):
             y=orb_pos[:, 1],
             z=orb_pos[:, 2],
             mode="markers",
-            marker=dict(size=1, color="#ccc"),
+            marker=dict(size=1, color="#C70039"),
         )
     )
     # fig.add_trace(
