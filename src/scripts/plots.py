@@ -2181,6 +2181,8 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
     random_slice = np.random.choice(halo.shape[0], size, replace=False)
     if halo2 is not None:
         random_slice2 = np.random.choice(halo2.shape[0], size, replace=False)
+    fig = plt.figure(figsize=(12, 10), dpi=300)
+    ax = fig.add_subplot(111)
     if type == "hist":
         if halo2 is not None:
             if proj == "x":
@@ -2395,7 +2397,7 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 plt.xlabel("Momento angular L_y (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
-                plt.title("2Phase diagram E vs L_y")
+                plt.title(r'Phase diagram $E$ vs $L_y$')
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2410,7 +2412,7 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 plt.xlabel("Momento angular L_z (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
-                plt.title("E(L_z)")
+                plt.title(r'Phase diagram $E$ vs $L_xz$')
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2421,11 +2423,11 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 10][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="#7DF9FF", label="Unperturbed")
+                plt.scatter(x_data, y_data, s=1, c="#1E90FF", label="Unperturbed")
                 plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 plt.xlabel("Momento angular L_mag (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
-                plt.title("E(L_mag) ")
+                plt.title(r'Phase diagram $E$ vs $L_{mag}$')
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
