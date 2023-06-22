@@ -2442,6 +2442,45 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
         print("No se puede graficar, no hay datos")
 
 
+def comparison_E_L(halo1, halo2, halo3, halo4, proj, slice=None):
+    """
+    This function creates a side-by-side comparison of two sets of halo data.
+    Each subplot contains two halos, with the first subplot showing the perturbed halos
+    and the second subplot showing the unperturbed halos.
+
+    Parameters:
+    halo1, halo2, halo3, halo4: numpy arrays containing the halo data
+    proj: string indicating the projection to use ('x', 'y', 'z', or 'mag')
+    slice: integer indicating the number of data points to use (default is None, which uses all data points)
+    """
+    if slice is None:
+        size = halo1.shape[0]
+    else:
+        size = min(slice, halo1.shape[0])
+
+    # Create random slices for each halo
+    random_slices = [np.random.choice(halo.shape[0], size, replace=False) for halo in [halo1, halo2, halo3, halo4]]
+
+    # Define the indices for the data based on the projection
+    proj_indices = {'x': (11, 15), 'y': (12, 15), 'z': (13, 15), 'mag': (10, 15)}
+
+    # Create a grid of subplots
+    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 6), dpi=300)
+
+    # Iterate over the halos and subplots
+    for i, (ax, halo1_slice, halo2_slice) in enumerate(zip(axes, random_slices[::2], random_slices[1::2])):
+        x1_data, y1_data = halo1[:, proj_indices[proj][0]][halo1_slice], halo1[:, proj_indices[proj][1]][halo1_slice]
+        x2_data, y2_data = halo2[:, proj_indices[proj][0]][halo2_slice], halo2[:, proj_indices[proj][1]][halo2_slice]
+        ax.scatter(x1_data, y1_data, s=1, c="#1E90FF", label=f"Halo {2*i+1}")
+        ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label=f"Halo {2*i+2}")
+        ax.set_xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
+        ax.set_ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
+        ax.set_title(f'Phase diagram $E$ vs $L_x$ ({"Perturbed" if i == 0 else "Unperturbed"} halos)', fontsize=20)
+        ax.set_aspect('equal', adjustable='box')
+        ax.legend()
+
+    plt.show()
+
 def sel3(sel_3, rel_lmc, proj):
     if proj == "xy":
         fig_sel3 = go.Figure()
