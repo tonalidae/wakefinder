@@ -1207,6 +1207,32 @@ def plot_3d(arr1, arr2, title):
     plot_3d.show()
 
 
+def plot_3d_plt(arr1, lmc, title):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # 3D scatter plot for arr1
+    scatter = ax.scatter(arr1[:, 0], arr1[:, 1], arr1[:, 2], c=arr1[:, 10], cmap=cm.viridis, s=1, alpha=0.8)
+
+    # 3D line plot for arr2
+    ax.plot(lmc[:, 0], lmc[:, 1], lmc[:, 2], color='orange', alpha=0.8)
+
+    # 3D cone for LMC velocity
+    cone_length = 10
+    cone_x = lmc[-1, 0] + cone_length * (lmc[-1, 3] - lmc[-2, 3])
+    cone_y = lmc[-1, 1] + cone_length * (lmc[-1, 4] - lmc[-2, 4])
+    cone_z = lmc[-1, 2] + cone_length * (lmc[-1, 5] - lmc[-2, 5])
+    ax.quiver(lmc[-1, 0], lmc[-1, 1], lmc[-1, 2], cone_x, cone_y, cone_z, color='red', alpha=0.8)
+
+    # Set axis labels and title
+    ax.set_xlabel('x [kpc]')
+    ax.set_ylabel('y [kpc]')
+    ax.set_zlabel('z [kpc]')
+    ax.set_title(title, fontsize=14)
+
+    # Display the plot
+    plt.show()
+
 def proj_both(arr1, arr2, arr3, proj):
     if proj == "xy":
         proj_xy_both = go.Figure()
