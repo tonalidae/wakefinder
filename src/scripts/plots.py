@@ -2415,7 +2415,7 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 ax.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 ax.set_xlabel(r'Momento angular $L_z$ (kpc km/s)',fontsize=14)
                 ax.set_ylabel(r'Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)', fontsize=14)
-                ax.set_title(r'Phase diagram $E$ vs $L_xz$', fontsize=20)                
+                ax.set_title(r'Phase diagram $E$ vs $L_z$', fontsize=20)                
                 ax.set_aspect('equal', adjustable='box')
                 if x_limits is not None:
                     plt.xlim(x_limits)
