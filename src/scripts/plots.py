@@ -1210,7 +1210,7 @@ def plot_3d(arr1, arr2, title):
 
 
 def plot_3d_plt(arr1, lmc, title):
-    fig = plt.figure(dpi=300, figsize=(6,4))
+    fig = plt.figure(dpi=300, figsize=(8,6))
     ax = fig.add_subplot(111, projection='3d')
 
     # 3D scatter plot for arr1
@@ -1220,7 +1220,8 @@ def plot_3d_plt(arr1, lmc, title):
     ax.plot(lmc[:, 0], lmc[:, 1], lmc[:, 2], color='orange', alpha=0.8, linewidth=1)
 
     # Add a colorbar for the scatter plot
-    cbar = plt.colorbar(scatter, shrink=0.4)
+    cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
+    cbar = plt.colorbar(scatter, cax=cbar_ax, shrink=0.5)
     cbar.set_label(f'$L$ [kpc km/s]', fontsize=8)
     
     # Set axis labels and title
@@ -1228,6 +1229,9 @@ def plot_3d_plt(arr1, lmc, title):
     ax.set_ylabel('y [kpc]')
     ax.set_zlabel('z [kpc]')
     ax.set_title(title, fontsize=12, y=1.05)
+    # Adjust subplot margins
+    plt.subplots_adjust(left=0.1, right=0.8, top=0.9, bottom=0.1)
+
 
     # Display the plot
     plt.show()
