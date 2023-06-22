@@ -2376,8 +2376,8 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 11][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="b", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="r", label="Perturbed")
+                plt.scatter(x_data, y_data, s=1, c="#6495ED", label="Unperturbed")
+                plt.scatter(x2_data, y2_data, s=1, c="#FF7F50", label="Perturbed")
                 plt.xlabel("Momento angular L_x (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
                 plt.title("2D Histogram of L_x density vs E")
@@ -2391,8 +2391,8 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 12][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="b", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="r", label="Perturbed")
+                plt.scatter(x_data, y_data, s=1, c="#6495ED", label="Unperturbed")
+                plt.scatter(x2_data, y2_data, s=1, c="#FF7F50", label="Perturbed")
                 plt.xlabel("Momento angular L_y (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
                 plt.title("2D Histogram of L_y Density vs E")
@@ -2406,8 +2406,8 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 13][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="b", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="r", label="Perturbed")
+                plt.scatter(x_data, y_data, s=1, c="#6495ED", label="Unperturbed")
+                plt.scatter(x2_data, y2_data, s=1, c="#FF7F50", label="Perturbed")
                 plt.xlabel("Momento angular L_z (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
                 plt.title("E(L_z)")
@@ -2421,8 +2421,8 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 y_data = halo[:, 15][random_slice]
                 x2_data = halo2[:, 10][random_slice2]
                 y2_data = halo2[:, 15][random_slice2]
-                plt.scatter(x_data, y_data, s=1, c="b", label="Unperturbed")
-                plt.scatter(x2_data, y2_data, s=1, c="r", label="Perturbed")
+                plt.scatter(x_data, y_data, s=1, c="#6495ED", label="Unperturbed")
+                plt.scatter(x2_data, y2_data, s=1, c="#FF7F50", label="Perturbed")
                 plt.xlabel("Momento angular L_mag (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
                 plt.title("E(L_mag) ")
