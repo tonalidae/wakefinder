@@ -687,6 +687,10 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     print(f"Skewness of perturbed halo in {proj[1]} direction: {pert_mean_skew_y}")
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
+    
+    # Save the figure
+    plt.savefig('../../media/imgs/sel2/' +figname+ '.png', bbox_inches='tight', dpi=300)
+    
     plt.show()
     
 
