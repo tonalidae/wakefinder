@@ -8,6 +8,8 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.colors import Normalize
 from matplotlib.colors import LogNorm
 from matplotlib.colors import SymLogNorm
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
 
 def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
