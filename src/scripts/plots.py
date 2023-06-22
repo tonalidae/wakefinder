@@ -2382,7 +2382,7 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 plt.xlabel("Momento angular L_x (kpc km/s)")
                 plt.ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)")
-                plt.title(r'Phase diagram $E$ vs $L_x$')
+                plt.title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2397,7 +2397,7 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 plt.xlabel("Momento angular L_y (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
-                plt.title(r'Phase diagram $E$ vs $L_y$')
+                plt.title(r'Phase diagram $E$ vs $L_y$', fontsize=20)
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2412,7 +2412,7 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 plt.xlabel("Momento angular L_z (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
-                plt.title(r'Phase diagram $E$ vs $L_xz$')
+                plt.title(r'Phase diagram $E$ vs $L_xz$', fontsize=20)
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
@@ -2427,7 +2427,7 @@ def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits
                 plt.scatter(x2_data, y2_data, s=1, c="#DC143C", label="Perturbed")
                 plt.xlabel("Momento angular L_mag (kpc km/s)")
                 plt.ylabel("Energia (km^2/s^2)")
-                plt.title(r'Phase diagram $E$ vs $L_{mag}$')
+                plt.title(r'Phase diagram $E$ vs $L_{mag}$', fontsize=20)
                 if x_limits is not None:
                     plt.xlim(x_limits)
                 if y_limits is not None:
