@@ -1214,14 +1214,14 @@ def plot_3d_plt(arr1, lmc, title):
     ax = fig.add_subplot(111, projection='3d')
 
     # 3D scatter plot for arr1
-    scatter = ax.scatter(arr1[:, 0], arr1[:, 1], arr1[:, 2], c=arr1[:, 10], cmap='viridis', s=1, alpha=0.7, label='wake', edgecolors='none')
+    scatter = ax.scatter(arr1[:, 0], arr1[:, 1], arr1[:, 2], c=arr1[:, 10], cmap='viridis', s=1.5, alpha=0.7, label='wake', edgecolors='none')
 
     # 3D line plot for arr2
     ax.plot(lmc[:, 0], lmc[:, 1], lmc[:, 2], color='orange', alpha=0.8, linewidth=1)
 
     # Add a colorbar for the scatter plot
     cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
-    cbar = plt.colorbar(scatter, cax=cbar_ax, shrink=0.5)
+    cbar = plt.colorbar(scatter, cax=cbar_ax, shrink=0.3)
     cbar.set_label(f'$L$ [kpc km/s]', fontsize=8)
     
     # Set axis labels and title
