@@ -412,7 +412,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
         lmc[:, x_data],
         lmc[:, y_data],
         linestyle="-",
-        color="cyan",
+        color="#C70039",
         alpha=0.8,
         label="lmc",
     )
@@ -639,7 +639,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         lmc[:, x_data],
         lmc[:, y_data],
         linestyle="-",
-        color="cyan",
+        color="#C70039",
         alpha=0.8,
         label="lmc",
     )
