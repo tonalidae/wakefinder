@@ -1220,8 +1220,8 @@ def plot_3d_plt(arr1, lmc, title):
     ax.plot(lmc[:, 0], lmc[:, 1], lmc[:, 2], color='orange', alpha=0.8, linewidth=1)
 
     # Add a colorbar for the scatter plot
-    cbar = plt.colorbar(scatter, shrink=0.6)
-    cbar.set_label(f'$L$ [kpc km/s]', fontsize=12)
+    cbar = plt.colorbar(scatter, shrink=0.4)
+    cbar.set_label(f'$L$ [kpc km/s]', fontsize=8)
     
     # Set axis labels and title
     ax.set_xlabel('x [kpc]')
