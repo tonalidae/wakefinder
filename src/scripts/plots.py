@@ -2175,7 +2175,7 @@ def vec_field2(pert, no_pert, lmc, proj):
 
 def E_L(halo, proj, type="hist", halo2=None, slice=None, x_limits=None, y_limits=None):
     if slice is None:
-        size = (halo.shape[0], halo2.shape[0])
+        size = min(halo.shape[0], halo2.shape[0])
     else:
         size = min(slice, halo.shape[0], halo2.shape[0])
     random_slice = np.random.choice(halo.shape[0], size, replace=False)
