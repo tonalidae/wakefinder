@@ -2567,7 +2567,7 @@ def econt_side_by_side(halo1, halo2, proj):
         ax.set_title(title, fontsize=16)  # Add subplot title
 
     # Create a ScalarMappable object with the same colormap and normalization as the contour plots
-    sm = ScalarMappable(cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax), alpha=0.7)
+    sm = ScalarMappable(cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax)
     sm.set_array([])  # Dummy array for the ScalarMappable
 
     # Add a single colorbar for both contour plots
