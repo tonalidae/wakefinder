@@ -2489,39 +2489,39 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
     fig = plt.figure(figsize=(12, 10), dpi=300)
     ax = fig.add_subplot(111)
     if proj == "x":
-        x_data = halo[:, 11][random_slice]
-        y_data = halo[:, 15][random_slice]
-        x2_data = halo2[:, 11][random_slice2]
-        y2_data = halo2[:, 15][random_slice2]
+        x_data = halo[:, 11]
+        y_data = halo[:, 15]
+        x2_data = halo2[:, 11]
+        y2_data = halo2[:, 15]
         # Create 2D histogram and contour plot
         hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
         ax.contour(X, Y, hist.T, cmap='viridis')
     elif proj == "y":
-        x_data = halo[:, 12][random_slice]
-        y_data = halo[:, 15][random_slice]
-        x2_data = halo2[:, 12][random_slice2]
-        y2_data = halo2[:, 15][random_slice2]
+        x_data = halo[:, 12]
+        y_data = halo[:, 15]
+        x2_data = halo2[:, 12]
+        y2_data = halo2[:, 15]
         
         # Create 2D histogram and contour plot
         hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
         ax.contour(X, Y, hist.T, cmap='viridis')
     elif proj == "z":
-        x_data = halo[:, 13][random_slice]
-        y_data = halo[:, 15][random_slice]
-        x2_data = halo2[:, 13][random_slice2]
-        y2_data = halo2[:, 15][random_slice2]
+        x_data = halo[:, 13]
+        y_data = halo[:, 15]
+        x2_data = halo2[:, 13]
+        y2_data = halo2[:, 15]
         
         # Create 2D histogram and contour plot
         hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
         ax.contour(X, Y, hist.T, cmap='viridis')
     elif proj == "mag":
-        x_data = halo[:, 10][random_slice]
-        y_data = halo[:, 15][random_slice]
-        x2_data = halo2[:, 10][random_slice2]
-        y2_data = halo2[:, 15][random_slice2]
+        x_data = halo[:, 10]
+        y_data = halo[:, 15]
+        x2_data = halo2[:, 10]
+        y2_data = halo2[:, 15]
         
         # Create 2D histogram and contour plot
         hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
