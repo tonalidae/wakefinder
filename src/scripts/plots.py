@@ -2478,14 +2478,7 @@ def comparison_E_L(halo1, halo2, halo3, halo4, proj, slice=None):
     plt.show()
 
 
-def E_L_contour(halo, proj, halo2=None, slice=None):
-    # if slice is None:
-    #     size = min(halo.shape[0], halo2.shape[0])
-    # else:
-    #     size = min(slice, halo.shape[0], halo2.shape[0])
-    # random_slice = np.random.choice(halo.shape[0], size, replace=False)
-    # if halo2 is not None:
-    #     random_slice2 = np.random.choice(halo2.shape[0], size, replace=False)
+def E_L_contour(halo, proj):
     fig = plt.figure(figsize=(12, 10), dpi=300)
     ax = fig.add_subplot(111)
     if proj == "x":
@@ -2501,8 +2494,8 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
         ax.set_xlabel(r'Specific angular momentum $L_y$ (kpc km/s)', fontsize=14)
         ax.set_title(r'Phase diagram $E$ vs $L_y$', fontsize=20)
     elif proj == "z":
-        x_data = halo2[:, 13]
-        y_data = halo2[:, 15]
+        x_data = halo[:, 13]
+        y_data = halo[:, 15]
         
         ax.set_xlabel(r'Specific angular momentum $L_z$ (kpc km/s)', fontsize=14)
         ax.set_title(r'Phase diagram $E$ vs $L_z$', fontsize=20)
@@ -2515,17 +2508,15 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
     else:
         raise ValueError("Invalid projection")
         
-    # Create 2D histograms and filled contour plots for each halo
+    # Create 2D histograms and filled contour plots for halo
     
     hist1, xedges1, yedges1 = np.histogram2d(x_data, y_data, bins=50)
     X1, Y1 = np.meshgrid(xedges1[:-1], yedges1[:-1])
     cf1 = ax.contourf(X1, Y1, hist1.T, cmap='Blues', alpha=0.7)
 
-    # Add colorbars for each contour plot
+    # Add colorbar for contour plot
     cbar1 = fig.colorbar(cf1, ax=ax, shrink=0.5, aspect=10, pad=0.02)
     cbar1.set_label('Unperturbed Halo Density', fontsize=12)
-    # cbar2 = fig.colorbar(cf2, ax=ax, shrink=0.5, aspect=10, pad=0.1)
-    # cbar2.set_label('Perturbed Halo Density', fontsize=12)
     
     ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
     ax.set_aspect('equal', adjustable='box')
