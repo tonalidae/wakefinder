@@ -2566,7 +2566,7 @@ def econt_side_by_side(halo1, halo2, proj):
         ax.set_aspect('equal', adjustable='box')
         ax.set_title(title, fontsize=24)  # Add subplot title
         # Add a vertical line at x=0 for each subplot
-        ax.axvline(x=0, color='orange', linestyle='--', linewidth=1)
+        ax.axvline(x=10000, color='orange', linestyle='--', linewidth=1)
         # ax.axvline(y=, color='orange', linestyle='--', linewidth=1)
         
     # Create a ScalarMappable object with the same colormap and normalization as the contour plots
