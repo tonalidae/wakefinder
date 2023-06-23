@@ -2527,7 +2527,7 @@ def E_L_contour(halo, proj):
 import numpy as np
 import matplotlib.pyplot as plt
 
-def econt_side_by_side(halo1, halo2, halo3, halo4 proj):
+def econt_side_by_side(halo1, halo2, proj):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 10), dpi=300, sharey=True)
     fig.subplots_adjust(right=0.8)  # Make room for the colorbar
 
@@ -2537,7 +2537,7 @@ def econt_side_by_side(halo1, halo2, halo3, halo4 proj):
     global_vmin = min(hist1.min(), hist2.min())
     global_vmax = max(hist1.max(), hist2.max())
 
-    for halo, ax, title in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Peturbed halo']):
+    for halo, ax, title in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Perturbed halo']):
         if proj == "x":
             x_data = halo[:, 11]
             y_data = halo[:, 15]
