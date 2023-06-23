@@ -2537,7 +2537,7 @@ def econt_side_by_side(halo1, halo2, proj):
     global_vmin = min(hist1.min(), hist2.min())
     global_vmax = max(hist1.max(), hist2.max())
 
-    for halo, ax in zip([halo1, halo2], [ax1, ax2]):
+    for halo, ax, title in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Peturbed halo']):
         if proj == "x":
             x_data = halo[:, 11]
             y_data = halo[:, 15]
@@ -2560,20 +2560,23 @@ def econt_side_by_side(halo1, halo2, proj):
         # Create 2D histograms and filled contour plots for halo
         hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
-        cf = ax.contourf(X, Y, hist.T, cmap='Blues', alpha=0.7, norm=Normalize(vmin=global_vmin, vmax=global_vmax), shrink=0.5, aspect=10, pad=0.02)
+        cf = ax.contourf(X, Y, hist.T, cmap='viridis', alpha=0.7, norm=Normalize(vmin=global_vmin, vmax=global_vmax))
 
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
+        ax.set_title(title, fontsize=16)  # Add subplot title
 
     # Create a ScalarMappable object with the same colormap and normalization as the contour plots
-    sm = ScalarMappable(cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
+    sm = ScalarMappable(cmap='viridis', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
     sm.set_array([])  # Dummy array for the ScalarMappable
 
     # Add a single colorbar for both contour plots
     cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
-    fig.colorbar(sm, cax=cbar_ax, label='Halo Density')
+    fig.colorbar(sm, cax=cbar_ax, label='Halo Density', shrink=0.5)
 
+    fig.suptitle('Phase diagram comparison', fontsize=20)  # Add general title for the whole figure
     plt.show()
+    
 def sel3(sel_3, rel_lmc, proj):
     if proj == "xy":
         fig_sel3 = go.Figure()
