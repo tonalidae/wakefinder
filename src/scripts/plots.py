@@ -2560,14 +2560,14 @@ def econt_side_by_side(halo1, halo2, proj):
         # Create 2D histograms and filled contour plots for halo
         hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
-        cf = ax.contourf(X, Y, hist.T, cmap='viridis', alpha=0.7, norm=Normalize(vmin=global_vmin, vmax=global_vmax))
+        cf = ax.contourf(X, Y, hist.T, cmap='Blues', alpha=0.7, norm=Normalize(vmin=global_vmin, vmax=global_vmax))
 
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
         ax.set_title(title, fontsize=16)  # Add subplot title
 
     # Create a ScalarMappable object with the same colormap and normalization as the contour plots
-    sm = ScalarMappable(cmap='viridis', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
+    sm = ScalarMappable(cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax), alpha=0.7)
     sm.set_array([])  # Dummy array for the ScalarMappable
 
     # Add a single colorbar for both contour plots
