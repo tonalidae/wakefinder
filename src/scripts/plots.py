@@ -2493,23 +2493,19 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
         y_data = halo[:, 15]
         x2_data = halo2[:, 11]
         y2_data = halo2[:, 15]
-        # Create 2D histogram and contour plot
-        hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
-        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
-        ax.contour(X, Y, hist.T, cmap='viridis')
-        cf = ax.contourf(X, Y, hist.T, cmap='viridis')
-
-        # Add a colorbar to the plot
-        fig.colorbar(cf, ax=ax)
-        x_data = halo[:, 12]
-        y_data = halo[:, 15]
-        x2_data = halo2[:, 12]
-        y2_data = halo2[:, 15]
         
-        # Create 2D histogram and contour plot
-        hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
-        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
-        ax.contour(X, Y, hist.T, cmap='viridis')
+        # Create 2D histograms and filled contour plots for each halo
+        hist1, xedges1, yedges1 = np.histogram2d(x_data, y_data, bins=50)
+        X1, Y1 = np.meshgrid(xedges1[:-1], yedges1[:-1])
+        cf1 = ax.contourf(X1, Y1, hist1.T, cmap='Blues', alpha=0.5)
+
+        hist2, xedges2, yedges2 = np.histogram2d(x2_data, y2_data, bins=50)
+        X2, Y2 = np.meshgrid(xedges2[:-1], yedges2[:-1])
+        cf2 = ax.contourf(X2, Y2, hist2.T, cmap='Reds', alpha=0.5)
+
+        ax.set_xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
+        ax.set_ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
+        ax.set_title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
     elif proj == "z":
         x_data = halo[:, 13]
         y_data = halo[:, 15]
@@ -2536,7 +2532,15 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
         ax.set_title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
         ax.set_aspect('equal', adjustable='box')
         plt.show()
-        
+    # Add colorbars for each contour plot
+    cbar1 = fig.colorbar(cf1, ax=ax, shrink=0.5, aspect=10, pad=0.02)
+    cbar1.set_label('Unperturbed Halo Density', fontsize=12)
+    cbar2 = fig.colorbar(cf2, ax=ax, shrink=0.5, aspect=10, pad=0.1)
+    cbar2.set_label('Perturbed Halo Density', fontsize=12)
+    
+    ax.set_aspect('equal', adjustable='box')
+
+    plt.show()
 
 
 
