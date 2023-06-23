@@ -2497,7 +2497,10 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
         hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
         ax.contour(X, Y, hist.T, cmap='viridis')
-    elif proj == "y":
+        cf = ax.contourf(X, Y, hist.T, cmap='viridis')
+
+        # Add a colorbar to the plot
+        fig.colorbar(cf, ax=ax)
         x_data = halo[:, 12]
         y_data = halo[:, 15]
         x2_data = halo2[:, 12]
