@@ -2479,13 +2479,13 @@ def comparison_E_L(halo1, halo2, halo3, halo4, proj, slice=None):
 
 
 def E_L_contour(halo, proj, halo2=None, slice=None):
-    if slice is None:
-        size = min(halo.shape[0], halo2.shape[0])
-    else:
-        size = min(slice, halo.shape[0], halo2.shape[0])
-    random_slice = np.random.choice(halo.shape[0], size, replace=False)
-    if halo2 is not None:
-        random_slice2 = np.random.choice(halo2.shape[0], size, replace=False)
+    # if slice is None:
+    #     size = min(halo.shape[0], halo2.shape[0])
+    # else:
+    #     size = min(slice, halo.shape[0], halo2.shape[0])
+    # random_slice = np.random.choice(halo.shape[0], size, replace=False)
+    # if halo2 is not None:
+    #     random_slice2 = np.random.choice(halo2.shape[0], size, replace=False)
     fig = plt.figure(figsize=(12, 10), dpi=300)
     ax = fig.add_subplot(111)
     if proj == "x":
