@@ -2541,18 +2541,22 @@ def econt_side_by_side(halo1, halo2, halo3, halo4, proj):
         if proj == "x":
             x_data = halo[:, 11]
             y_data = halo[:, 15]
+            x_sel = 11
             ax.set_xlabel(r'Specific angular momentum $L_x$ (kpc km/s)', fontsize=14)
         elif proj == "y":
             x_data = halo[:, 12]
             y_data = halo[:, 15]
+            x_sel = 12
             ax.set_xlabel(r'Specific angular momentum $L_y$ (kpc km/s)', fontsize=14)
         elif proj == "z":
             x_data = halo[:, 13]
             y_data = halo[:, 15]
+            x_sel = 13
             ax.set_xlabel(r'Specific angular momentum $L_z$ (kpc km/s)', fontsize=14)
         elif proj == "mag":
             x_data = halo[:, 10]
             y_data = halo[:, 15]
+            x_sel = 10
             ax.set_xlabel(r'Magnitude of specific angular momentum $L$ (kpc km/s)', fontsize=14)
         else:
             raise ValueError("Invalid projection")
@@ -2562,7 +2566,7 @@ def econt_side_by_side(halo1, halo2, halo3, halo4, proj):
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
         cf = ax.contourf(X, Y, hist.T, cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
         
-        ax.scatter(selected_halo[:, x_data], selected_halo[:,y_data], s=1, color='#DC143C', label='Selected halo')
+        ax.scatter(selected_halo[:, x_sel], selected_halo[:,15], s=1, color='#DC143C', label='Selected halo')
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
         ax.set_title(title, fontsize=24)  # Add subplot title
