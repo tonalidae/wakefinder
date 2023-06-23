@@ -2477,6 +2477,67 @@ def comparison_E_L(halo1, halo2, halo3, halo4, proj, slice=None):
         ax.legend()
     plt.show()
 
+
+def E_L_contour(halo, proj, halo2=None, slice=None):
+    if slice is None:
+        size = min(halo.shape[0], halo2.shape[0])
+    else:
+        size = min(slice, halo.shape[0], halo2.shape[0])
+    random_slice = np.random.choice(halo.shape[0], size, replace=False)
+    if halo2 is not None:
+        random_slice2 = np.random.choice(halo2.shape[0], size, replace=False)
+    fig = plt.figure(figsize=(12, 10), dpi=300)
+    ax = fig.add_subplot(111)
+    if proj == "x":
+        x_data = halo[:, 11][random_slice]
+        y_data = halo[:, 15][random_slice]
+        x2_data = halo2[:, 11][random_slice2]
+        y2_data = halo2[:, 15][random_slice2]
+        # Create 2D histogram and contour plot
+        hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
+        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
+        ax.contour(X, Y, hist.T, cmap='viridis')
+    elif proj == "y":
+        x_data = halo[:, 12][random_slice]
+        y_data = halo[:, 15][random_slice]
+        x2_data = halo2[:, 12][random_slice2]
+        y2_data = halo2[:, 15][random_slice2]
+        
+        # Create 2D histogram and contour plot
+        hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
+        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
+        ax.contour(X, Y, hist.T, cmap='viridis')
+    elif proj == "z":
+        x_data = halo[:, 13][random_slice]
+        y_data = halo[:, 15][random_slice]
+        x2_data = halo2[:, 13][random_slice2]
+        y2_data = halo2[:, 15][random_slice2]
+        
+        # Create 2D histogram and contour plot
+        hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
+        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
+        ax.contour(X, Y, hist.T, cmap='viridis')
+    elif proj == "mag":
+        x_data = halo[:, 10][random_slice]
+        y_data = halo[:, 15][random_slice]
+        x2_data = halo2[:, 10][random_slice2]
+        y2_data = halo2[:, 15][random_slice2]
+        
+        # Create 2D histogram and contour plot
+        hist, xedges, yedges = np.histogram2d(np.concatenate((x_data, x2_data)), np.concatenate((y_data, y2_data)), bins=50)
+        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
+        ax.contour(X, Y, hist.T, cmap='viridis')
+
+        ax.set_xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
+        ax.set_ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
+        ax.set_title(r'Phase diagram $E$ vs $L_x$', fontsize=20)
+        ax.set_aspect('equal', adjustable='box')
+        plt.show()
+        
+
+
+
+
 def sel3(sel_3, rel_lmc, proj):
     if proj == "xy":
         fig_sel3 = go.Figure()
