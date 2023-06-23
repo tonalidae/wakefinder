@@ -10,6 +10,7 @@ from matplotlib.colors import LogNorm
 from matplotlib.colors import SymLogNorm
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
+from matplotlib.cm import ScalarMappable
 
 def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
@@ -2528,6 +2529,11 @@ import matplotlib.pyplot as plt
 
 def econt_side_by_side(halo1, halo2, proj):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 10), dpi=300, sharey=True)
+    fig.subplots_adjust(right=0.8)  # Make room for the colorbar
+
+    # Find global minimum and maximum values for the data in both halos
+    global_vmin = min(np.min(halo1[:, 15]), np.min(halo2[:, 15]))
+    global_vmax = max(np.max(halo1[:, 15]), np.max(halo2[:, 15]))
 
     for halo, ax in zip([halo1, halo2], [ax1, ax2]):
         if proj == "x":
@@ -2552,15 +2558,20 @@ def econt_side_by_side(halo1, halo2, proj):
         # Create 2D histograms and filled contour plots for halo
         hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
-        cf = ax.contourf(X, Y, hist.T, cmap='Blues', alpha=0.7)
+        cf = ax.contourf(X, Y, hist.T, cmap='viridis', alpha=0.7, vmin=global_vmin, vmax=global_vmax)
+
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
+
+    # Create a ScalarMappable object with the same colormap and normalization as the contour plots
+    sm = ScalarMappable(cmap='viridis', norm=plt.Normalize(vmin=global_vmin, vmax=global_vmax))
+    sm.set_array([])  # Dummy array for the ScalarMappable
+
     # Add a single colorbar for both contour plots
     cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
-    cbar_ax.set_label('Halo Density', fontsize=12)
-    fig.colorbar(cf, cax=cbar_ax, shrink=0.5, label='Halo Density', aspect=10, pad=0.02)
-    plt.show()
+    fig.colorbar(sm, cax=cbar_ax, label='Halo Density')
 
+    plt.show()
 
 def sel3(sel_3, rel_lmc, proj):
     if proj == "xy":
