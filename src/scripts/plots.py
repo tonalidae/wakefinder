@@ -2527,7 +2527,7 @@ def E_L_contour(halo, proj):
 import numpy as np
 import matplotlib.pyplot as plt
 
-def econt_side_by_side(halo1, halo2, proj):
+def econt_side_by_side(halo1, halo2, halo3, halo4, proj):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 10), dpi=300, sharey=True)
     fig.subplots_adjust(right=0.8)  # Make room for the colorbar
 
@@ -2537,7 +2537,7 @@ def econt_side_by_side(halo1, halo2, proj):
     global_vmin = min(hist1.min(), hist2.min())
     global_vmax = max(hist1.max(), hist2.max())
 
-    for halo, ax, title in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Peturbed halo']):
+    for halo, ax, title, selected_halo in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Peturbed halo'], [halo3, halo4]):
         if proj == "x":
             x_data = halo[:, 11]
             y_data = halo[:, 15]
@@ -2561,12 +2561,15 @@ def econt_side_by_side(halo1, halo2, proj):
         hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
         cf = ax.contourf(X, Y, hist.T, cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
-
+        
+        ax.scatter(selected_halo[:, 11], selected_halo[:, 15], s=1, color='#DC143C', label='Selected halo')
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
         ax.set_title(title, fontsize=24)  # Add subplot title
         # Add a vertical line at x=0 for each subplot
         ax.axvline(x=0, color='orange', linestyle='--', linewidth=1)
+        # ax.axvline(y=, color='orange', linestyle='--', linewidth=1)
+        
     # Create a ScalarMappable object with the same colormap and normalization as the contour plots
     sm = ScalarMappable(cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
     sm.set_array([])  # Dummy array for the ScalarMappable
