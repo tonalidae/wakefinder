@@ -2523,7 +2523,45 @@ def E_L_contour(halo, proj):
 
     plt.show()
 
+import numpy as np
+import matplotlib.pyplot as plt
 
+def econt_side_by_side(halo1, halo2, proj):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 10), dpi=300, sharey=True)
+
+    for halo, ax in zip([halo1, halo2], [ax1, ax2]):
+        if proj == "x":
+            x_data = halo[:, 11]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Specific angular momentum $L_x$ (kpc km/s)', fontsize=14)
+        elif proj == "y":
+            x_data = halo[:, 12]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Specific angular momentum $L_y$ (kpc km/s)', fontsize=14)
+        elif proj == "z":
+            x_data = halo[:, 13]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Specific angular momentum $L_z$ (kpc km/s)', fontsize=14)
+        elif proj == "mag":
+            x_data = halo[:, 10]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Magnitude of specific angular momentum $L$ (kpc km/s)', fontsize=14)
+        else:
+            raise ValueError("Invalid projection")
+
+        # Create 2D histograms and filled contour plots for halo
+        hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=50)
+        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
+        cf = ax.contourf(X, Y, hist.T, cmap='Blues', alpha=0.7)
+
+        # Add colorbar for contour plot
+        cbar = fig.colorbar(cf, ax=ax, shrink=0.5, aspect=10, pad=0.02)
+        cbar.set_label('Halo Density', fontsize=12)
+
+        ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
+        ax.set_aspect('equal', adjustable='box')
+
+    plt.show()
 
 
 def sel3(sel_3, rel_lmc, proj):
