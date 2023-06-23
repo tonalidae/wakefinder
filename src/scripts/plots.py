@@ -2527,7 +2527,7 @@ def E_L_contour(halo, proj):
 import numpy as np
 import matplotlib.pyplot as plt
 
-def econt_side_by_side(halo1, halo2, halo3, halo4, proj):
+def econt_side_by_side(halo1, halo2, halo3, halo4 proj):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 10), dpi=300, sharey=True)
     fig.subplots_adjust(right=0.8)  # Make room for the colorbar
 
@@ -2537,7 +2537,63 @@ def econt_side_by_side(halo1, halo2, halo3, halo4, proj):
     global_vmin = min(hist1.min(), hist2.min())
     global_vmax = max(hist1.max(), hist2.max())
 
-    for halo, ax, title, selected_halo in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Peturbed halo'], [halo3, halo4]):
+    for halo, ax, title in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Peturbed halo']):
+        if proj == "x":
+            x_data = halo[:, 11]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Specific angular momentum $L_x$ (kpc km/s)', fontsize=14)
+        elif proj == "y":
+            x_data = halo[:, 12]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Specific angular momentum $L_y$ (kpc km/s)', fontsize=14)
+        elif proj == "z":
+            x_data = halo[:, 13]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Specific angular momentum $L_z$ (kpc km/s)', fontsize=14)
+        elif proj == "mag":
+            x_data = halo[:, 10]
+            y_data = halo[:, 15]
+            ax.set_xlabel(r'Magnitude of specific angular momentum $L$ (kpc km/s)', fontsize=14)
+        else:
+            raise ValueError("Invalid projection")
+
+        # Create 2D histograms and filled contour plots for halo
+        hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=50)
+        X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
+        cf = ax.contourf(X, Y, hist.T, cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
+        
+        ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
+        ax.set_aspect('equal', adjustable='box')
+        ax.set_title(title, fontsize=24)  # Add subplot title
+        # Add a vertical line at x=0 for each subplot
+        ax.axvline(x=0, color='orange', linestyle='--', linewidth=1)
+        # ax.axvline(y=, color='orange', linestyle='--', linewidth=1)
+        
+    # Create a ScalarMappable object with the same colormap and normalization as the contour plots
+    sm = ScalarMappable(cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
+    sm.set_array([])  # Dummy array for the ScalarMappable
+
+    # Add a single colorbar for both contour plots
+    cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
+    fig.colorbar(sm, cax=cbar_ax, label='Halo Density', shrink=0.5)
+
+    fig.suptitle('Phase diagram comparison', fontsize=20)  # Add general title for the whole figure
+    plt.show()
+    
+    
+    
+    
+def econt_scatter_side(halo1, halo2, halo3, halo4, proj):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 10), dpi=300, sharey=True)
+    fig.subplots_adjust(right=0.8)  # Make room for the colorbar
+
+    # Calculate global minimum and maximum density values for both halos
+    hist1, _, _ = np.histogram2d(halo1[:, 11], halo1[:, 15], bins=50)
+    hist2, _, _ = np.histogram2d(halo2[:, 11], halo2[:, 15], bins=50)
+    global_vmin = min(hist1.min(), hist2.min())
+    global_vmax = max(hist1.max(), hist2.max())
+
+    for halo, ax, title, selected_halo in zip([halo1, halo2], [ax1, ax2], ['Unperturbed halo', 'Perturbed halo'], [halo3, halo4]):
         if proj == "x":
             x_data = halo[:, 11]
             y_data = halo[:, 15]
