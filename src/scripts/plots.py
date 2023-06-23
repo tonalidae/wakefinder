@@ -2562,7 +2562,7 @@ def econt_side_by_side(halo1, halo2, halo3, halo4, proj):
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
         cf = ax.contourf(X, Y, hist.T, cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
         
-        ax.scatter(selected_halo[:, 11], selected_halo[:, 15], s=1, color='#DC143C', label='Selected halo')
+        ax.scatter(selected_halo[:, x_data], selected_halo[:,y_data], s=1, color='#DC143C', label='Selected halo')
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
         ax.set_title(title, fontsize=24)  # Add subplot title
