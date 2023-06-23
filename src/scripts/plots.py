@@ -2497,11 +2497,12 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
         # Create 2D histograms and filled contour plots for each halo
         hist1, xedges1, yedges1 = np.histogram2d(x_data, y_data, bins=50)
         X1, Y1 = np.meshgrid(xedges1[:-1], yedges1[:-1])
-        cf1 = ax.contourf(X1, Y1, hist1.T, cmap='Blues', alpha=0.5)
+        cf1 = ax.contourf(X1, Y1, hist1.T, cmap='Blues', alpha=0.7)
 
-        # hist2, xedges2, yedges2 = np.histogram2d(x2_data, y2_data, bins=50)
-        # X2, Y2 = np.meshgrid(xedges2[:-1], yedges2[:-1])
-        # cf2 = ax.contourf(X2, Y2, hist2.T, cmap='Reds', alpha=0.5)
+        hist2, xedges2, yedges2 = np.histogram2d(x2_data, y2_data, bins=50)
+        X2, Y2 = np.meshgrid(xedges2[:-1], yedges2[:-1])
+        cf2 = ax.contourf(X2, Y2, hist2.T, cmap='Oranges', alpha=0.7)
+
 
         ax.set_xlabel(r'Momento angular $L_x$ (kpc km/s)', fontsize=14)
         ax.set_ylabel(r"Energia ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
@@ -2535,8 +2536,8 @@ def E_L_contour(halo, proj, halo2=None, slice=None):
     # Add colorbars for each contour plot
     cbar1 = fig.colorbar(cf1, ax=ax, shrink=0.5, aspect=10, pad=0.02)
     cbar1.set_label('Unperturbed Halo Density', fontsize=12)
-    # cbar2 = fig.colorbar(cf2, ax=ax, shrink=0.5, aspect=10, pad=0.1)
-    # cbar2.set_label('Perturbed Halo Density', fontsize=12)
+    cbar2 = fig.colorbar(cf2, ax=ax, shrink=0.5, aspect=10, pad=0.1)
+    cbar2.set_label('Perturbed Halo Density', fontsize=12)
     
     ax.set_aspect('equal', adjustable='box')
 
