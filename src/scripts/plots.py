@@ -2564,8 +2564,9 @@ def econt_side_by_side(halo1, halo2, proj):
 
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
-        ax.set_title(title, fontsize=16)  # Add subplot title
-
+        ax.set_title(title, fontsize=24)  # Add subplot title
+        # Add a vertical line at x=0 for each subplot
+        ax.axvline(x=0, color='orange', linestyle='--', linewidth=1)
     # Create a ScalarMappable object with the same colormap and normalization as the contour plots
     sm = ScalarMappable(cmap='Blues', norm=Normalize(vmin=global_vmin, vmax=global_vmax))
     sm.set_array([])  # Dummy array for the ScalarMappable
