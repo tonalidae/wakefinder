@@ -2552,12 +2552,13 @@ def econt_side_by_side(halo1, halo2, proj):
         # Create 2D histograms and filled contour plots for halo
         hist, xedges, yedges = np.histogram2d(x_data, y_data, bins=50)
         X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
-        cf = ax.contourf(X, Y, hist.T, cmap='viridis', alpha=0.7)
+        cf = ax.contourf(X, Y, hist.T, cmap='Blues', alpha=0.7)
         ax.set_ylabel(r"Energy ($\frac{\mathrm{km}^2}{\mathrm{s}^2}$)", fontsize=14)
         ax.set_aspect('equal', adjustable='box')
     # Add a single colorbar for both contour plots
     cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
-    fig.colorbar(cf, cax=cbar_ax, label='Halo Density')
+    cbar_ax.set_label('Halo Density', fontsize=12)
+    fig.colorbar(cf, cax=cbar_ax, shrink=0.5, label='Halo Density', aspect=10, pad=0.02)
     plt.show()
 
 
