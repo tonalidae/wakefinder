@@ -643,10 +643,10 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         color="#E74C3C",
         alpha=0.8,
         label="lmc",
-        marker='o',
-        markersize=8,
-        markerfacecolor='#2980B9',
-        markeredgecolor='#2980B9'
+        marker="o",
+        markersize=5,
+        markerfacecolor='#E7AC3C',
+        markeredgecolor='#E78C3C'
     )
     # Customize grid
     ax1.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.5)
