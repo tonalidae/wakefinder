@@ -674,9 +674,11 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     print("Circular variance: ", circular_variance)
 
     # Calculate the gradient of the arrows with respect to the x and y coordinates
-    grad_x1_x, grad_x1_y = np.gradient(x1_directions)
-    grad_y1_x, grad_y1_y = np.gradient(y1_directions)
+    grad_x1= np.gradient(x1_directions)
+    grad_y1= np.gradient(y1_directions)
 
+    print("grad_x1: ", grad_x1)
+    print("grad_y1: ", grad_y1)
 
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
