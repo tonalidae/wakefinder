@@ -644,7 +644,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         alpha=0.8,
         label="lmc",
         marker="o",
-        markersize=5,
+        markersize=3,
         markerfacecolor='#E7AC3C',
         markeredgecolor='#E78C3C'
     )
@@ -653,6 +653,28 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     # Calculate the skewness of the halo
     unpert_skew_x = skew(hist1, axis=0)
     unpert_skew_y = skew(hist1, axis=1)
+    
+    # Calculate the angles of the arrows in radians
+    angles1 = np.arctan2(y1_directions, x1_directions)
+    # Calculate the mean and stardard deviation of the angles
+    mean_angles1 = np.mean(angles1)
+    std_angles1 = np.std(angles1)
+    print("Mean angle: ", mean_angles1)
+    print("Standard deviation of angles: ", std_angles1)
+    # Calculate the mean direction vector
+    mean_cos1 = np.mean(np.cos(angles1))
+    mean_sin1 = np.mean(np.sin(angles1))
+    mean_direction_vector = np.array([mean_cos1, mean_sin1])
+    
+    #Calculate the length of the mean direction vector
+    mean_direction_vector_length = np.linalg.norm(mean_direction_vector)
+    
+    #Calculate the circular variance
+    circular_variance = 1 - mean_direction_vector_length
+    print("Circular variance: ", circular_variance)
+
+
+
 
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
@@ -673,10 +695,10 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         color="#E74C3C",
         alpha=0.8,
         label="lmc",
-        marker='o',
-        markersize=8,
-        markerfacecolor='#2980B9',
-        markeredgecolor='#2980B9'
+        marker="o",
+        markersize=3,
+        markerfacecolor='#E7AC3C',
+        markeredgecolor='#E78C3C'
     )
     
     # Customize grid
@@ -699,6 +721,28 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     print(f"Skewness of unperturbed halo in {proj[1]} direction: {unpert_mean_skew_y}")
     print(f"Skewness of perturbed halo in {proj[0]} direction: {pert_mean_skew_x}")
     print(f"Skewness of perturbed halo in {proj[1]} direction: {pert_mean_skew_y}")
+    
+    
+    # Calculate the angles of the arrows in radians
+    angles2 = np.arctan2(y2_directions, x2_directions)
+    # Calculate the mean and stardard deviation of the angles
+    mean_angles2 = np.mean(angles2)
+    std_angles2 = np.std(angles2)
+    print("Mean angle: ", mean_angles2)
+    print("Standard deviation of angles: ", std_angles2)
+    # Calculate the mean direction vector
+    mean_cos2 = np.mean(np.cos(angles2))
+    mean_sin2 = np.mean(np.sin(angles2))
+    mean_direction_vector = np.array([mean_cos2, mean_sin2])
+    
+    #Calculate the length of the mean direction vector
+    mean_direction_vector_length = np.linalg.norm(mean_direction_vector)
+    
+    #Calculate the circular variance
+    circular_variance = 1 - mean_direction_vector_length
+    print("Circular variance: ", circular_variance)
+
+    
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
     
