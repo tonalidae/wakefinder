@@ -680,6 +680,17 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     print("grad_x1: ", grad_x1)
     print("grad_y1: ", grad_y1)
 
+
+    # Calculate the magnitude of the gradient vectors for the first plot
+    magnitude_grad_x1 = np.sqrt(grad_x1[0]**2 + grad_x1[1]**2)
+    magnitude_grad_y1 = np.sqrt(grad_y1[0]**2 + grad_y1[1]**2)
+
+    # Calculate the average magnitude of the gradient vectors for the first plot
+    avg_magnitude_grad_x1 = np.mean(magnitude_grad_x1)
+    avg_magnitude_grad_y1 = np.mean(magnitude_grad_y1)
+
+
+
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
     im2 = ax2.imshow(hist2.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", vmin=global_min, vmax=global_max)
@@ -745,6 +756,32 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     #Calculate the circular variance
     circular_variance = 1 - mean_direction_vector_length
     print("Circular variance: ", circular_variance)    
+    
+        # Calculate the gradient of the arrows with respect to the x and y coordinates
+    grad_x2= np.gradient(x2_directions)
+    grad_y2= np.gradient(y2_directions)
+
+    print("grad_x2: ", grad_x2)
+    print("grad_y2: ", grad_y2)
+
+
+    # Calculate the magnitude of the gradient vectors for the second plot
+    magnitude_grad_x2 = np.sqrt(grad_x2[0]**2 + grad_x2[1]**2)
+    magnitude_grad_y2 = np.sqrt(grad_y2[0]**2 + grad_y2[1]**2)
+
+    # Calculate the average magnitude of the gradient vectors for the second plot
+    avg_magnitude_grad_x2 = np.mean(magnitude_grad_x2)
+    avg_magnitude_grad_y2 = np.mean(magnitude_grad_y2)
+
+
+    # Compare the average magnitudes of the gradient vectors
+    if avg_magnitude_grad_x1 > avg_magnitude_grad_x2 and avg_magnitude_grad_y1 > avg_magnitude_grad_y2:
+        print("The first plot has a higher gradient.")
+    elif avg_magnitude_grad_x1 < avg_magnitude_grad_x2 and avg_magnitude_grad_y1 < avg_magnitude_grad_y2:
+        print("The second plot has a higher gradient.")
+    else:
+        print("The gradients are not clearly higher in one plot.")
+    
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
     
