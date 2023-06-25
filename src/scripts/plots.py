@@ -767,7 +767,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     avg_magnitude_grad_y2 = np.mean(magnitude_grad_y2)
 
     # Calculate the divergence of the velocity field for the second plot
-    divergence2 = grad_x2[0] + grad_y2[1]
+    divergence2 = grad_x2 + grad_y2
     print("Divergence: ", divergence2)
 
     # Compare the average magnitudes of the gradient vectors
