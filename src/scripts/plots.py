@@ -687,7 +687,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
 
     # Calculate the divergence of the velocity field for the first plot
     divergence1 = grad_x1[0] + grad_y1[1]
-
+    print("Divergence: ", divergence1)
 
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
@@ -766,6 +766,9 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     avg_magnitude_grad_x2 = np.mean(magnitude_grad_x2)
     avg_magnitude_grad_y2 = np.mean(magnitude_grad_y2)
 
+    # Calculate the divergence of the velocity field for the second plot
+    divergence2 = grad_x2[0] + grad_y2[1]
+    print("Divergence: ", divergence2)
 
     # Compare the average magnitudes of the gradient vectors
     if avg_magnitude_grad_x1 > avg_magnitude_grad_x2 and avg_magnitude_grad_y1 > avg_magnitude_grad_y2:
