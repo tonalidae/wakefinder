@@ -643,7 +643,13 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         color="#E74C3C",
         alpha=0.8,
         label="lmc",
+        marker='o',
+        markersize=8,
+        markerfacecolor='#2980B9',
+        markeredgecolor='#2980B9'
     )
+    # Customize grid
+    ax1.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.5)
     # Calculate the skewness of the halo
     unpert_skew_x = skew(hist1, axis=0)
     unpert_skew_y = skew(hist1, axis=1)
@@ -667,7 +673,14 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         color="#E74C3C",
         alpha=0.8,
         label="lmc",
+        marker='o',
+        markersize=8,
+        markerfacecolor='#2980B9',
+        markeredgecolor='#2980B9'
     )
+    
+    # Customize grid
+    ax2.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.5)
     # Calculate the skewness of the halo
     pert_skew_x = skew(hist2, axis=0)
     pert_skew_y = skew(hist2, axis=1)
