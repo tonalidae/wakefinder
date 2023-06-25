@@ -744,12 +744,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     
     #Calculate the circular variance
     circular_variance = 1 - mean_direction_vector_length
-    print("Circular variance: ", circular_variance)
-    
-    # Calculate the gradient of the velocity field
-    v, u 
-    
-    
+    print("Circular variance: ", circular_variance)    
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
     
