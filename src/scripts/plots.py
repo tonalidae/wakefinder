@@ -676,11 +676,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     # Calculate the gradient of the arrows with respect to the x and y coordinates
     grad_x1= np.gradient(x1_directions)
     grad_y1= np.gradient(y1_directions)
-
-    print("grad_x1: ", grad_x1)
-    print("grad_y1: ", grad_y1)
-
-
+    
     # Calculate the magnitude of the gradient vectors for the first plot
     magnitude_grad_x1 = np.sqrt(grad_x1[0]**2 + grad_x1[1]**2)
     magnitude_grad_y1 = np.sqrt(grad_y1[0]**2 + grad_y1[1]**2)
@@ -689,6 +685,8 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     avg_magnitude_grad_x1 = np.mean(magnitude_grad_x1)
     avg_magnitude_grad_y1 = np.mean(magnitude_grad_y1)
 
+    # Calculate the divergence of the velocity field for the first plot
+    divergence1 = grad_x1[0] + grad_y1[1]
 
 
     # Second subplot: quiver plot and 2D histogram
@@ -760,11 +758,6 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
         # Calculate the gradient of the arrows with respect to the x and y coordinates
     grad_x2= np.gradient(x2_directions)
     grad_y2= np.gradient(y2_directions)
-
-    print("grad_x2: ", grad_x2)
-    print("grad_y2: ", grad_y2)
-
-
     # Calculate the magnitude of the gradient vectors for the second plot
     magnitude_grad_x2 = np.sqrt(grad_x2[0]**2 + grad_x2[1]**2)
     magnitude_grad_y2 = np.sqrt(grad_y2[0]**2 + grad_y2[1]**2)
