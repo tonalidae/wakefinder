@@ -620,7 +620,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     y_min_halo2 = np.min(halo2[:, y_data])
     y_max_halo2 = np.max(halo2[:, y_data])
 
-# ...
+
     # Create the figure and subplots
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
 
@@ -673,7 +673,9 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     circular_variance = 1 - mean_direction_vector_length
     print("Circular variance: ", circular_variance)
 
-
+    # Calculate the gradient of the arrows with respect to the x and y coordinates
+    grad_x1_x, grad_x1_y = np.gradient(x1_directions)
+    grad_y1_x, grad_y1_y = np.gradient(y1_directions)
 
 
     # Second subplot: quiver plot and 2D histogram
@@ -741,7 +743,10 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     #Calculate the circular variance
     circular_variance = 1 - mean_direction_vector_length
     print("Circular variance: ", circular_variance)
-
+    
+    # Calculate the gradient of the velocity field
+    v, u 
+    
     
     # Add a general title for the entire figure
     fig.suptitle('Particle density and velocity direction for proj'+proj, fontsize=16)
