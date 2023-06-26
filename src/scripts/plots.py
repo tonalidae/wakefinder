@@ -113,7 +113,7 @@ def plot_histogram(hist, figure_name):
         origin="lower",
         vmin=0,
         vmax=5,
-        cmap="viridis",
+        cmap="plasma",
     )
     ax.set_xlabel(r"Distance magnitudes  in [$\mathrm{kpc}$]", fontsize=8)
     ax.set_ylabel(
@@ -121,6 +121,12 @@ def plot_histogram(hist, figure_name):
         fontsize=8,
     )
     plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})[\mathrm{low}]$ unperturbed", fontsize=15)
+    
+    # Add colorbar
+    cbar = plt.colorbar(im, ax=ax)
+    cbar.set_label("Log-scaled bin values", fontsize=12)
+    cbar.ax.tick_params(labelsize=10)
+
     plt.savefig('../../media/imgs/'+'hist'+figure_name+'.png', bbox_inches='tight', dpi=300)
     plt.show()
 
