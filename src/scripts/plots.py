@@ -113,15 +113,20 @@ def plot_histogram(hist, figure_name):
         origin="lower",
         vmin=0,
         vmax=5,
-        cmap="plasma",
+        cmap="inferno",
     )
-    ax.set_xlabel(r"Distance magnitudes  in [$\mathrm{kpc}$]", fontsize=8)
+    ax.set_xlabel(r"Distance magnitudes  in [$\mathrm{kpc}$]", fontsize=12)
     ax.set_ylabel(
         r"$ \mathrm{L_{mag}}[\mathrm{low}] \,\mathrm{in} \,[ \mathrm{kpc} \mathrm{ km} \mathrm{ s^{-1}}]$",
-        fontsize=8,
+        fontsize=12,
     )
     plt.suptitle(r"$\mathrm{L}_{\mathrm{mag}}(\mathrm{r}_{\mathrm{mag}})[\mathrm{low}]$ unperturbed", fontsize=15)
     
+    # Add dashed line at y=10000
+    ax.axhline(y=10000, color='white', linestyle='--', linewidth=1)
+
+    # Add gridlines
+    ax.grid(color='white', linestyle='-', linewidth=0.5, alpha=0.3)
     # Add colorbar
     cbar = plt.colorbar(im, ax=ax)
     cbar.set_label("Log-scaled bin values", fontsize=12)
