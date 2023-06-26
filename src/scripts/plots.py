@@ -690,6 +690,8 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     
     
     divergence_1 = np.array([grad_x1[i] + grad_y1[i] for i in range(len(x1_directions))])
+    print("Divergence_1: ", divergence_1)
+
 
     print("Divergence: ", divergence1)
     print("Divergence_1 shape: ", divergence1.shape)
@@ -778,7 +780,7 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     
     # Calculate the divergence for each vector
     divergence_2 = np.array([grad_x2[i] + grad_y2[i] for i in range(len(x2_directions))])
-
+    print("Divergence2 : ", divergence_2)
     
     print("Divergence: ", divergence2)
     print("Divergence2 shape: ", divergence2.shape)
