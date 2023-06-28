@@ -472,13 +472,13 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     ax1.set_xlabel(x_label, fontsize=14)
     ax1.set_ylabel(y_label, fontsize=14)
     ax1.tick_params(axis='both', which='major', labelsize=12)
-    ax1.grid(True)
+    # ax1.grid(True)
 
     
     
     
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis", norm=norm, levels=levels)
-    ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=1.5, levels=levels)
+    ax2.contour(xx, yy, pdf2, colors="white", alpha=0.8, linewidths=0.5, levels=levels)
         #LMC orbit plot in the projection
     ax2.plot(
         lmc[:, x_data],
@@ -513,7 +513,9 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
         # Add a colorbar to the plot
-    cbar = fig.colorbar(contour_filled2, ax=[ax1, ax2], format=ScalarFormatter())
+        
+    cbar = fig.colorbar(contour_filled2, ax=[ax1, ax2], format=ScalarFormatter(), shrink=0.9, cax=cax, extend='both')
+
     cbar.ax.tick_params(labelsize=12)
     cbar.set_label('Density', fontsize=14)
 
