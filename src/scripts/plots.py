@@ -478,7 +478,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     
     
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis", norm=norm, levels=levels)
-    ax2.contour(xx, yy, pdf2, colors="white", alpha=0.8, linewidths=0.5, levels=levels)
+    ax2.contour(xx, yy, pdf2, colors="white", alpha=0.5, linewidths=0.5, levels=levels)
         #LMC orbit plot in the projection
     ax2.plot(
         lmc[:, x_data],
@@ -500,7 +500,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     ax2.set_xlim(xmin_2, xmax_2)
     ax2.set_ylim(ymin_2, ymax_2)
     ax2.set_aspect("equal", "box")
-    ax2.grid(True)
+    # ax2.grid(True)
 
     # ax2.set_title('Perturbed halo '+proj)  # Add title for the second subplot
     # ax2.set_xlabel(x_label)  # Add x-axis label for the second subplot
@@ -516,10 +516,9 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
         
     cbar = fig.colorbar(contour_filled2, ax=[ax1, ax2], format=ScalarFormatter(), shrink=0.9, cax=cax, extend='both')
 
-    cbar.ax.tick_params(labelsize=12)
-    cbar.set_label('Density', fontsize=14)
 
-    
+    cbar.ax.tick_params(labelsize=12)
+    cbar.set_label('Density', fontsize=14, labelpad=10) 
     
     # fig.colorbar(contour_filled2, cax=cax)
     # Add a general title for the entire figure
