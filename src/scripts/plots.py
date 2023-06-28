@@ -463,7 +463,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     ax1.set_aspect("equal", "box")
     
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis", norm=norm, levels=levels)
-    ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
+    # ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
         #LMC orbit plot in the projection
     ax2.plot(
         lmc[:, x_data],
