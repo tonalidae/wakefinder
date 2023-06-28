@@ -105,7 +105,7 @@ def calculate_histogram(halo, bins_r, bins_L):
     return hist
 
 def plot_histogram(hist, figure_name):
-    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+    fig, ax = plt.subplots(1, 1, figsize=(5, 5),dpi=600)
     im = plt.imshow(
         np.log10(hist.T),
         extent=[50, 195, 0, 50000],
