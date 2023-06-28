@@ -438,12 +438,12 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     levels = np.linspace(global_min, global_max, num_levels)
     
     
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8), dpi=600, sharex=True, sharey=True)
     
 
     # Contour plot for the first subplot
     contour_filled1 = ax1.contourf(xx, yy, pdf1, cmap="viridis", norm=norm, levels=levels)
-    ax1.contour(xx, yy, pdf1, colors="black", alpha=0.8, linewidths=0.5)
+    # ax1.contour(xx, yy, pdf1, colors="black", alpha=0.8, linewidths=0.5)
     #LMC orbit plot in the projection
     ax1.plot(
         lmc[:, x_data],
