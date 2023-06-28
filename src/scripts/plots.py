@@ -437,7 +437,7 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
     norm = SymLogNorm(linthresh=0.01, vmin=global_min, vmax=global_max)
 
     # Define the number of levels for the contour plots
-    num_levels = 15
+    num_levels = 12
     levels = np.linspace(global_min, global_max, num_levels)
     
     
@@ -695,14 +695,14 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
 
 
     # Create the figure and subplots
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8), dpi=600, sharex=True, sharey=True)
 
     # First subplot: quiver plot and 2D histogram
     ax1.quiver(x1_positions, y1_positions, x1_directions, y1_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label', edgecolors="black", linewidths=0.5)
     im1 = ax1.imshow(hist1.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", vmin=global_min, vmax=global_max)
-    ax1.set_title('Unperturbed halo')
-    ax1.set_xlabel(x_label)
-    ax1.set_ylabel(y_label)
+    ax1.set_title('Unperturbed halo', fontsize=16)
+    ax1.set_xlabel(x_label, fontsize=14)
+    ax1.set_ylabel(y_label, fontsize=14)
     # Set the x and y limits for the first subplot based on halo 2 min and max values
     ax1.set_xlim(x_min_halo2, x_max_halo2)
     ax1.set_ylim(y_min_halo2, y_max_halo2)
@@ -766,9 +766,9 @@ def comparison_hist_orbit_plt(halo1, halo2,lmc, proj, coarse_step, arrow_scale, 
     # Second subplot: quiver plot and 2D histogram
     ax2.quiver(x2_positions, y2_positions, x2_directions, y2_directions, scale=arrow_scale, width=arrow_width, color="white", alpha=0.5, label='label2', edgecolors="black", linewidths=0.5)
     im2 = ax2.imshow(hist2.T, origin="lower", cmap=cmap, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", vmin=global_min, vmax=global_max)
-    ax2.set_title('Perturbed halo')
-    ax2.set_xlabel(x_label)
-    ax2.set_ylabel(y_label)
+    ax2.set_title('Perturbed halo', fontsize=16)
+    ax2.set_xlabel(x_label, fontsize=14)
+    ax2.set_ylabel(y_label, fontsize=14)
     # Set the x and y limits for the first subplot based on halo 2 min and max values
     ax2.set_xlim(x_min_halo2, x_max_halo2)
     ax2.set_ylim(y_min_halo2, y_max_halo2)
