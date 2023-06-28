@@ -11,6 +11,9 @@ from matplotlib.colors import SymLogNorm
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib.cm import ScalarMappable
+from matplotlib.ticker import ScalarFormatter
+
+
 
 def hist_r_l(halo,ispert=False,figname='mw'):
     """Plot the histogram of the position of the LMC around the MW.
@@ -452,18 +455,30 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
         color="#E74C3C",
         alpha=0.8,
         label="lmc",
+        marker="o",
+        markersize=3,
+        markerfacecolor='#E7AC3C',
+        markeredgecolor='#E78C3C'
     )
-    ax1.set_title('Unperturbed halo '+proj)  # Add title for the first subplot
-    ax1.set_xlabel(x_label)  # Add x-axis label for the first subplot
-    ax1.set_ylabel(y_label)  # Add y-axis label for the first subplot
+    # ax1.set_title('Unperturbed halo '+proj)  # Add title for the first subplot
+    # ax1.set_xlabel(x_label)  # Add x-axis label for the first subplot
+    # ax1.set_ylabel(y_label)  # Add y-axis label for the first subplot
     # Set zoom
     ax1.set_xlim(xmin_2, xmax_2)
     ax1.set_ylim(ymin_2, ymax_2)
     # Set equal aspect ratio
     ax1.set_aspect("equal", "box")
+    ax1.set_title('Unperturbed halo '+proj, fontsize=16)
+    ax1.set_xlabel(x_label, fontsize=14)
+    ax1.set_ylabel(y_label, fontsize=14)
+    ax1.tick_params(axis='both', which='major', labelsize=12)
+    ax1.grid(True)
+
+    
+    
     
     contour_filled2 = ax2.contourf(xx, yy, pdf2, cmap="viridis", norm=norm, levels=levels)
-    # ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=0.5)
+    ax2.contour(xx, yy, pdf2, colors="black", alpha=0.8, linewidths=1.5, levels=levels)
         #LMC orbit plot in the projection
     ax2.plot(
         lmc[:, x_data],
@@ -472,18 +487,39 @@ def comparison_density_contour_plt(halo1, halo2, lmc, proj):
         color="#E74C3C",
         alpha=0.8,
         label="lmc",
+        marker="o",
+        markersize=3,
+        markerfacecolor='#E7AC3C',
+        markeredgecolor='#E78C3C'
     )
-    ax2.set_title('Perturbed halo '+proj)  # Add title for the second subplot
-    ax2.set_xlabel(x_label)  # Add x-axis label for the second subplot
-    ax2.set_ylabel(y_label)  # Add y-axis label for the second subplot
-    # Set zoom
+    
+    ax2.set_title('Perturbed halo '+proj, fontsize=16)
+    ax2.set_xlabel(x_label, fontsize=14)
+    ax2.set_ylabel(y_label, fontsize=14)
+    ax2.tick_params(axis='both', which='major', labelsize=12)
     ax2.set_xlim(xmin_2, xmax_2)
     ax2.set_ylim(ymin_2, ymax_2)
     ax2.set_aspect("equal", "box")
+    ax2.grid(True)
+
+    # ax2.set_title('Perturbed halo '+proj)  # Add title for the second subplot
+    # ax2.set_xlabel(x_label)  # Add x-axis label for the second subplot
+    # ax2.set_ylabel(y_label)  # Add y-axis label for the second subplot
+    # Set zoom
+    # ax2.set_xlim(xmin_2, xmax_2)
+    # ax2.set_ylim(ymin_2, ymax_2)
+    # ax2.set_aspect("equal", "box")
     # Create a single colorbar for both subplots
     divider = make_axes_locatable(ax2)
     cax = divider.append_axes("right", size="5%", pad=0.1)
-    fig.colorbar(contour_filled2, cax=cax)
+        # Add a colorbar to the plot
+    cbar = fig.colorbar(contour_filled2, ax=[ax1, ax2], format=ScalarFormatter())
+    cbar.ax.tick_params(labelsize=12)
+    cbar.set_label('Density', fontsize=14)
+
+    
+    
+    # fig.colorbar(contour_filled2, cax=cax)
     # Add a general title for the entire figure
     fig.suptitle('Density Contours in proj '+proj, fontsize=24)
     plt.savefig('../../media/imgs/sel2/' + 'Lmag_pos' +figname+ '.png', bbox_inches='tight', dpi=300)
